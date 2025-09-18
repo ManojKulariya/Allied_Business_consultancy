@@ -37,17 +37,22 @@
     <link rel="stylesheet" href="{{ asset('admin/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('admin/css/demo.css') }}" />
 
+        <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('admin_backup/vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('admin_backup/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('admin_backup/css/demo.css') }}" />
+
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin_backup/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="{{ asset('admin/vendor/css/pages/page-auth.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin_backup/vendor/css/pages/page-auth.css') }}" />
 
     <!-- Helpers -->
-    <script src="{{ asset('admin/vendor/js/helpers.js') }}"></script>
+    <script src="{{ asset('admin_backup/vendor/js/helpers.js') }}"></script>
 
-    <!-- Template customizer & theme config -->
-    <script src="{{ asset('admin/js/config.js') }}"></script>
+    <!-- Template customizer & Theme config files -->
+    <script src="{{ asset('admin_backup/js/config.js') }}"></script>
   </head>
 
   <body>
@@ -136,10 +141,10 @@
     <script src="{{ asset('admin/vendor/js/bootstrap.js') }}"></script>
     <script src="{{ asset('admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-    <script src="{{ asset('admin/vendor/js/menu.js') }}"></script>
+    <script src="{{ asset('public/js/menu.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{ asset('admin/js/main.js') }}"></script>
+    <script src="{{ asset('public/js/main.js') }}"></script>
 
     <!-- GitHub buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

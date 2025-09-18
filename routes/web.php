@@ -18,6 +18,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\FCMController;
 use App\Http\Controllers\SocialLinkController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -32,6 +33,11 @@ use App\Http\Controllers\SocialLinkController;
 */
 Route::get('/send-fcm', [FCMController::class, 'sendNotification']);
 Route::post('/save-fcm-token', [FCMController::class, 'storeToken']);
+Route::get('/',[HomeController::class,'index']);
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
+Route::post('/contact', [HomeController::class, 'contactSubmit'])->name('contact.submit');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -81,6 +87,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('orders', OrderController::class)->only(['index', 'show', 'update', 'destroy']);
     
         Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+
+        // Contact Messages
+        Route::get('contact-messages', [\App\Http\Controllers\Admin\ContactMessageController::class, 'index'])->name('contact-messages.index');
+        Route::get('contact-messages/{id}', [\App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('contact-messages.show');
+        Route::delete('contact-messages/{id}', [\App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('sliders', [SettingController::class, 'sliders'])->name('sliders');

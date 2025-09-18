@@ -17,6 +17,7 @@ class AuthController extends Controller
 
 public function register(Request $request)
 {
+    // dd($request->all());
     // $request->validate([
     //     'name' => 'required|string|max:255',
     //     'email' => 'required|string|email|max:255|unique:users',
@@ -40,6 +41,7 @@ public function register(Request $request)
 
 public function login(Request $request)
 {
+    // dd($request->all());
 $loginValue = $request->input('login') ?? $request->input('name');
 
 $login_type = filter_var($loginValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
