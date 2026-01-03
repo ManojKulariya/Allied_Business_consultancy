@@ -47,22 +47,20 @@
                                         <li class="nav-item">
                                             <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#services">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle {{ request()->is('income-tax-efiling') ? 'active' : '' }}" href="{{ route('income-tax-efiling') }}" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Services
-                                                <span class="sub-nav-toggler"> </span>
-                                                <button class="sub-nav-toggler"> <i class="las la-angle-down"></i> </button>
                                             </a>
-                                            <ul class="sub-menu">
-                                                <li><a href="#services">Service 1</a></li>
-                                                <li><a href="#services">Service 2</a></li>
+                                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                                                <li><a class="dropdown-item" href="{{ route('income-tax-efiling') }}">Service 1</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('service2') }}">Service 2</a></li>
                                             </ul>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#dubai-setup">Dubai Setup</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#blog">Blog</a>
+                                            <a class="nav-link {{ request()->is('blog') ? 'active' : '' }}" href="{{ route('blog') }}">Blog</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact Us</a>

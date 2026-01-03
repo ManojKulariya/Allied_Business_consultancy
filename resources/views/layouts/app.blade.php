@@ -37,6 +37,9 @@
     <!-- Responsive CSS -->
     <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
     
+    <!-- Wix Viewer CSS -->
+    <link rel="stylesheet" href="https://static.parastorage.com/services/wix-viewer/1.0.0/viewer.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-mpG5WlG+1rYF0mU+mZ+BTSsLZME0GDWjWEq8sRMFXD34pO2qZhKMZnm9Q+3gOkGvY+2i9UQdAxrGj7klQ0x0jQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -100,6 +103,38 @@
                 autoplaySpeed: 3000,    // 3 sec
                 infinite: true,         // loop
                 adaptiveHeight: true    // adjusts height per testimonial
+            });
+        });
+    </script>
+
+    <!-- Navbar dropdown open on hover (desktop) -->
+    <script>
+        $(function(){
+            // only enable hover on non-touch devices and when viewport is wider than 992px
+            function enableHoverDropdown(){
+                if(('ontouchstart' in window) || $(window).width() < 992) return;
+                $('ul.navbar-nav .nav-item.dropdown').hover(
+                    function(){
+                        var $this = $(this);
+                        $this.addClass('show');
+                        $this.find('.dropdown-menu').addClass('show');
+                        $this.find('.dropdown-toggle').attr('aria-expanded','true');
+                    },
+                    function(){
+                        var $this = $(this);
+                        $this.removeClass('show');
+                        $this.find('.dropdown-menu').removeClass('show');
+                        $this.find('.dropdown-toggle').attr('aria-expanded','false');
+                    }
+                );
+            }
+
+            enableHoverDropdown();
+            // re-evaluate on resize
+            $(window).on('resize', function(){
+                // remove any existing handlers then re-enable
+                $('ul.navbar-nav .nav-item.dropdown').off('mouseenter mouseleave');
+                enableHoverDropdown();
             });
         });
     </script>

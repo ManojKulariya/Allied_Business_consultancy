@@ -37,6 +37,15 @@ Route::get('/',[HomeController::class,'index']);
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+Route::get('/blog', function () {
+    return view('pages.blog');
+})->name('blog');
+Route::get('/income-tax-efiling', function () {
+    return view('pages.income-tax-efiling');
+})->name('income-tax-efiling');
+Route::get('/service-2', function () {
+    return view('pages.service2');
+})->name('service2');
 Route::post('/contact', [HomeController::class, 'contactSubmit'])->name('contact.submit');
 
 Route::prefix('admin')->name('admin.')->group(function () {
