@@ -1,116 +1,8 @@
-<!DOCTYPE html>
-<!-- saved from url=(0052)https://iideainformatics.it/html/taxvi/services.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">    
+@extends('layouts.app')
 
-    <title>Taxvi | Tax Advisor &amp; Financial Consulting HTML Template</title>
+@section('title', 'Income Tax E-filing')
 
-    <!--Favicon-->
-    <link rel="icon" href="https://iideainformatics.it/html/taxvi/assets/img/favicon.png" type="image/jpg">
-    <!-- Bootstrap CSS -->
-    <link href="./servise_files/bootstrap.min.css" rel="stylesheet">
-    <!-- Line Awesome CSS -->
-    <link href="./servise_files/line-awesome.min.css" rel="stylesheet">
-    <!-- Font Awesome CSS -->
-    <link href="./servise_files/fontAwesomePro.css" rel="stylesheet">
-    <!-- Animate CSS-->
-    <link href="./servise_files/animate.css" rel="stylesheet">
-    <!-- Bar Filler CSS -->
-    <link href="./servise_files/barfiller.css" rel="stylesheet">
-    <!-- Magnific Popup Video -->
-    <link href="./servise_files/magnific-popup.css" rel="stylesheet">
-    <!-- Flaticon CSS -->
-    <link href="./servise_files/flaticon.css" rel="stylesheet">
-    <!-- Owl Carousel CSS -->
-    <link href="./servise_files/owl.carousel.css" rel="stylesheet">
-    <!-- Slick Slider CSS -->
-    <link href="./servise_files/slick.css" rel="stylesheet">
-    <!-- Nice Select  -->
-    <link href="./servise_files/nice-select.css" rel="stylesheet">
-    <!-- Back to Top -->
-    <link href="./servise_files/backToTop.css" rel="stylesheet">
-    <!-- Style CSS -->
-    <link href="./servise_files/style.css" rel="stylesheet">
-    <!-- Responsive CSS -->
-    <link href="./servise_files/responsive.css" rel="stylesheet">
-    
-
-    <!-- jquery -->
-    <script src="./servise_files/jquery-1.12.4.min.js.download"></script>
-</head>
-
-<body class="white-bg">
-
-    <!-- Mouse Cursor  -->
-    <div class="mouseCursor cursor-outer" style="visibility: visible; transform: translate(678px, 492px);"></div>
-    <div class="mouseCursor cursor-inner" style="visibility: visible; transform: translate(678px, 492px);"><span>Drag</span></div>
-
-    <!-- Pre-Loader -->
-    <div class="preloader" style="display: none;"></div>
-   
-    <!-- Header Top Area -->
-
-    <div class="header-top-area green-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-5 col-md-5 col-12">
-                    <div class="header-info">
-                        <i class="las la-clock"></i>
-                        <p><span>Working Hours</span>: Sunday-Monday, 09 a.m.- 5 p.m.</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-3 col-md-3 col-12 text-center">
-                    <div class="contact-info">                        
-                        <a href="tel:+000(123)556989"><span>Call</span>: +000(123)556989</a>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-12 text-end">
-                    <div class="language-dropdown">                        
-                        <select name="language" style="display: none;">
-                            <option value="default">US.English</option>
-                        </select><div class="nice-select" tabindex="0"><span class="current">US.English</span><ul class="list"><li data-value="default" class="option selected">US.English</li></ul></div>
-                    </div>
-                    <div class="social-icon">                        
-                        <a href="#"><i class="lab la-facebook-f"></i></a>
-                        <a href="#"><i class="lab la-twitter"></i></a>
-                        <a href="#"><i class="lab la-instagram"></i></a>
-                        <a href="#"><i class="lab la-dribbble"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header Area -->
-
-    <div class="header-area light-bg-1">
-        <div id="sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 90px;"><div class="sticky-area" style="width: 1265px; position: fixed; top: 0px; z-index: inherit;">
-            <div class="navigation">
-                <div class="container">
-                    <div class="header-inner-box">                        
-                        <div class="logo">
-                            <a class="navbar-brand" href="/"><img src="./servise_files/logo.png" alt=""></a>                            
-                        </div>
-
-                        <div class="main-menu">
-                            <nav class="navbar navbar-expand-lg">
-                                <!-- menu omitted -->
-                            </nav>
-                        </div>
-
-                        <div class="header-right">
-                            <div class="search-icon search-trigger"><i class="fal fa-search"></i></div>                                                        
-                            <a href="/contact">Get in Touch <i class="fal fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div></div>        
-    </div>
-
+@section('content')
     <!-- Breadcrumb Area  -->
 
     <div class="breadcrumb-area services section-padding light-bg-1 pb-0">
@@ -128,7 +20,7 @@
             <div class="row mt-90">
                 <div class="col-12">
                     <div class="bread-bg">
-                        <img src="./servise_files/service_banner.jpg" alt="">
+                        <img src="{{ asset('frontend/servise_files/service_banner.jpg') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -148,7 +40,7 @@
                             <a href="#" class="details-link"><i class="las la-arrow-right"></i></a>
                         </div>  
                         <div class="service-img">
-                            <img src="./servise_files/service-1.jpg" alt="">
+                            <img src="{{ asset('frontend/servise_files/service-1.jpg') }}" alt="">
                         </div>                      
                     </div>
                     <div class="single-service-item">
@@ -158,7 +50,7 @@
                             <a href="#" class="details-link"><i class="las la-arrow-right"></i></a>
                         </div>    
                         <div class="service-img">
-                            <img src="./servise_files/service-2.jpg" alt="">
+                            <img src="{{ asset('frontend/servise_files/service-2.jpg') }}" alt="">
                         </div>                                          
                     </div>
                     <div class="single-service-item">
@@ -168,7 +60,7 @@
                             <a href="#" class="details-link"><i class="las la-arrow-right"></i></a>
                         </div> 
                         <div class="service-img">
-                            <img src="./servise_files/service-3.jpg" alt="">
+                            <img src="{{ asset('frontend/servise_files/service-3.jpg') }}" alt="">
                         </div>                                             
                     </div>
                     <div class="single-service-item">
@@ -178,7 +70,7 @@
                             <a href="#" class="details-link"><i class="las la-arrow-right"></i></a>
                         </div>  
                         <div class="service-img">
-                            <img src="./servise_files/service-4.jpg" alt="">
+                            <img src="{{ asset('frontend/servise_files/service-4.jpg') }}" alt="">
                         </div>                                            
                     </div>
                     <div class="single-service-item">
@@ -188,7 +80,7 @@
                             <a href="#" class="details-link"><i class="las la-arrow-right"></i></a>
                         </div>  
                         <div class="service-img">
-                            <img src="./servise_files/service-5.jpg" alt="">
+                            <img src="{{ asset('frontend/servise_files/service-5.jpg') }}" alt="">
                         </div>                                            
                     </div>                     
                 </div>
@@ -281,7 +173,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-12">
                     <div class="process-bg">
-                        <img src="./servise_files/process_bg-2.jpg" alt="">
+                        <img src="{{ asset('frontend/servise_files/process_bg-2.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-12">
@@ -341,7 +233,7 @@
                 <div class="offset-xl-4 col-xl-7 offset-lg-4 col-lg-7 offset-md-4 col-md-7">
                     <p class="text-white">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words look even slightly believable. If you are going to use a passage </p>
                 </div>
-                                
+                            
                 
                 <div class="pop-up-video">
                     <a href="https://www.youtube.com/watch?v=yFwGpiCs3ss" class="video-play-btn mfp-iframe">
@@ -368,17 +260,17 @@
         <!-- instagram omitted -->
     </div>
     <div class="instagram-shape">
-        <img src="./servise_files/instagram_shape.png" alt="">
+        <img src="{{ asset('frontend/servise_files/instagram_shape.png') }}" alt="">
     </div>
     </div>
 
     <!-- Client Area  -->
     <div class="clients-area section-padding">
         <div class="client-logo-wrap">
-            <img src="./servise_files/themeforest.png" alt="themeforest-logo">
-            <img src="./servise_files/codecanyon.png" alt="codecanyon-logo">
-            <img src="./servise_files/videohive.png" alt="videohibe-logo">
-            <img src="./servise_files/graphicriver.png" alt="graphicriver-logo">
+            <img src="{{ asset('frontend/servise_files/themeforest.png') }}" alt="themeforest-logo">
+            <img src="{{ asset('frontend/servise_files/codecanyon.png') }}" alt="codecanyon-logo">
+            <img src="{{ asset('frontend/servise_files/videohive.png') }}" alt="videohibe-logo">
+            <img src="{{ asset('frontend/servise_files/graphicriver.png') }}" alt="graphicriver-logo">
         </div>
     </div>
 
@@ -395,101 +287,4 @@
         </div>
         
     </div>
-
-    <!-- Footer Area  -->
-
-    <div class="footer-area light-bg-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-5 col-12">
-                    <div class="footer-widget">
-                        <div class="logo">
-                            <!-- omitted -->
-                        </div>
-                        <p class="company-desc">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.</p>
-                        <div class="support-info">
-                            <!-- omitted -->
-                        </div>
-                    </div>
-                </div>
-                <div class="offset-xl-1 col-xl-5 col-lg-5 col-md-6 col-12">
-                     <div class="footer-widget">
-                        <div class="row">
-                            <!-- omitted -->
-                        </div>
-                     </div>   
-                </div>
-                <div class="col-xl-3 col-lg-3 col-12">
-                    <div class="footer-widget">
-                        <div class="project-gallery">
-                            <!-- omitted -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12 text-center">
-                    <div class="founder-year-wrap">
-                        <span>since 1990</span>
-                    </div>
-                    <div class="footer-navbar">
-                        <ul>
-                            <!-- omitted -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-shape">
-            <img src="./servise_files/shape-7.png" alt="">
-        </div>
-    </div>
-
-    <!-- Footer Botoom Area  -->
-
-    <div class="footer-bottom yellow-bg">
-        <p>©Copyright 2023. All Rights Reserved. DevGalaxy</p>
-    </div>
-
-    <!-- back to top start -->
-    <div class="progress-wrap active-progress">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 19.8837;"></path>
-        </svg>
-    </div>    
-
-
-    <!-- Popper JS -->
-    <script src="./servise_files/popper.min.js.download"></script>
-    <!-- Bootstrap JS -->
-    <script src="./servise_files/bootstrap.min.js.download"></script>
-    <!-- Wow JS -->
-    <script src="./servise_files/wow.min.js.download"></script>
-    <!-- Way Points JS -->
-    <script src="./servise_files/jquery.waypoints.min.js.download"></script>
-    <!-- Counter Up JS -->
-    <script src="./servise_files/jquery.counterup.min.js.download"></script>
-    <!-- Owl Carousel JS -->
-    <script src="./servise_files/owl.carousel.min.js.download"></script>
-    <!-- Slick Slider JS -->
-    <script src="./servise_files/slick.min.js.download"></script>    
-    <!-- Magnific Popup JS -->
-    <script src="./servise_files/magnific-popup.min.js.download"></script>
-    <!-- Isotope JS -->
-    <script src="./servise_files/isotope-3.0.6-min.js.download"></script>
-    <!-- Sticky JS -->
-    <script src="./servise_files/jquery.sticky.js.download"></script>
-    <!-- Nice Select JS -->
-    <script src="./servise_files/jquery.nice-select.min.js.download"></script>
-    <!-- Back To Top JS -->
-    <script src="./servise_files/backToTop.js.download"></script>
-    <!-- Progress Bar JS -->
-    <script src="./servise_files/jquery.barfiller.js.download"></script>    
-    <!-- Circle Progress Bar JS -->
-    <script src="./servise_files/circle-progress.min.js.download"></script>    
-    <!-- Main JS -->
-    <script src="./servise_files/main.js.download"></script>
-    
-    
-
-</body></html>
+@endsection
