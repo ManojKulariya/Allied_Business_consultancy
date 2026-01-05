@@ -43,10 +43,63 @@ Route::get('/blog', function () {
 Route::get('/income-tax-efiling', function () {
     return view('pages.income-tax-efiling');
 })->name('income-tax-efiling');
-Route::get('/service-2', function () {
-    return view('pages.service2');
-})->name('service2');
-Route::post('/contact', [HomeController::class, 'contactSubmit'])->name('contact.submit');
+Route::get('/gst', function () {
+    return view('pages.gst');
+})->name('gst');
+Route::get('/tds-return-filing', function () {
+    return view('pages.tds');
+})->name('tds-return-filing');
+Route::get('/huf-filing', function () {
+    return view('pages.huf');
+})->name('huf-filing');
+Route::get('/appeal', function () {
+    return view('pages.appeal');
+})->name('appeal');
+Route::get('/tax-plan', function () {
+    return view('pages.tax-plan');
+})->name('tax-plan');
+Route::get('/tan-registration', function () {
+    return view('pages.tan-registration');
+})->name('tan-registration');
+Route::get('/private-and-public-limited-company', function () {
+    return view('pages.private-and-public-limited-company');
+})->name('private-and-public-limited-company');
+Route::get('/partnership-firm-and-llp-registration', function () {
+    return view('pages.partnership-firm-and-llp-registration');
+})->name('partnership-firm-and-llp-registration');
+Route::get('/income-tax-notice', function () {
+    return view('pages.income-tax-notice');
+})->name('income-tax-notice');
+Route::get('/mybizcfo', function () {
+    return view('pages.mybizcfo');
+})->name('mybizcfo');
+Route::get('/pf-withdrawal', function () {
+    return view('pages.pf-withdrawal');
+})->name('pf-withdrawal');
+Route::get('/professional-tax-filing', function () {
+    return view('pages.professional-tax-filing');
+})->name('professional-tax-filing');
+Route::get('/small-business-registration', function () {
+    return view('pages.small-business-registration');
+})->name('small-business-registration');
+Route::get('/lower-deduction-certificate', function () {
+    return view('pages.lower-deduction-certificate');
+})->name('lower-deduction-certificate');
+Route::get('/digital-signature-certificate', function () {
+    return view('pages.digital-signature-certificate');
+})->name('digital-signature-certificate');
+Route::get('/business-license-registration', function () {
+    return view('pages.business-license-registration');
+})->name('business-license-registration');
+Route::get('/pan-application-process', function () {
+    return view('pages.pan-application-process');
+})->name('pan-application-process');
+Route::get('/company-registration-online', function () {
+    return view('pages.company-registration-online');
+})->name('company-registration-online');
+Route::get('/one-person-company-registration', function () {
+    return view('pages.one-person-company-registration');
+})->name('one-person-company-registration');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 

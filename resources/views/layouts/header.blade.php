@@ -48,12 +48,40 @@
                                             <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle {{ request()->is('income-tax-efiling') ? 'active' : '' }}" href="{{ route('income-tax-efiling') }}" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Services
                                             </a>
-                                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                                                <li><a class="dropdown-item" href="{{ route('income-tax-efiling') }}">Service 1</a></li>
-                                                <li><a class="dropdown-item" href="{{ route('service2') }}">Service 2</a></li>
+                                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown" style="min-width: 600px;">
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6 class="dropdown-header">Tax & Compliance Services</h6>
+                                                            <a class="dropdown-item" href="{{ route('income-tax-efiling') }}">Income Tax E-filing</a>
+                                                            <a class="dropdown-item" href="{{ route('gst') }}">GST Filing</a>
+                                                            <a class="dropdown-item" href="{{ route('tds-return-filing') }}">TDS Return Filing</a>
+                                                            <a class="dropdown-item" href="{{ route('huf-filing') }}">HUF Filing</a>
+                                                            <a class="dropdown-item" href="{{ route('appeal') }}">Appeal</a>
+                                                            <a class="dropdown-item" href="{{ route('tax-plan') }}">Tax Planner</a>
+                                                            <a class="dropdown-item" href="{{ route('tan-registration') }}">TAN Registration</a>
+                                                            <a class="dropdown-item" href="{{ route('income-tax-notice') }}">Income Tax Notice</a>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <h6 class="dropdown-header">Business Registration & Other Services</h6>
+                                                            <a class="dropdown-item" href="{{ route('private-and-public-limited-company') }}">Private & Public Limited Company</a>
+                                                            <a class="dropdown-item" href="{{ route('partnership-firm-and-llp-registration') }}">Partnership Firm & LLP Registration</a>
+                                                            <a class="dropdown-item" href="{{ route('company-registration-online') }}">Company Registration Online</a>
+                                                            <a class="dropdown-item" href="{{ route('one-person-company-registration') }}">One-Person Company Registration</a>
+                                                            <a class="dropdown-item" href="{{ route('mybizcfo') }}">MyBizCFO</a>
+                                                            <a class="dropdown-item" href="{{ route('pf-withdrawal') }}">PF Withdrawal</a>
+                                                            <a class="dropdown-item" href="{{ route('professional-tax-filing') }}">Professional Tax Filing</a>
+                                                            <a class="dropdown-item" href="{{ route('small-business-registration') }}">Small Business Registration</a>
+                                                            <a class="dropdown-item" href="{{ route('lower-deduction-certificate') }}">Lower Deduction Certificate</a>
+                                                            <a class="dropdown-item" href="{{ route('digital-signature-certificate') }}">Digital Signature Certificate</a>
+                                                            <a class="dropdown-item" href="{{ route('business-license-registration') }}">Business License Registration</a>
+                                                            <a class="dropdown-item" href="{{ route('pan-application-process') }}">PAN Application Process</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li class="nav-item">
