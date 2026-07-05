@@ -18,6 +18,21 @@
                 </a>
             </li>
 
+            @can('home-sections.edit')
+                <li class="nav-item">
+                    <a href="{{ safe_route('admin.home-sections.index') }}" class="nav-link {{ active_menu('admin.home-sections.*') }}">
+                        <i class="bi bi-house-gear"></i> <span>Homepage Builder</span>
+                    </a>
+                </li>
+            @endcan
+            @can('media.view')
+                <li class="nav-item">
+                    <a href="{{ safe_route('admin.media.index') }}" class="nav-link {{ active_menu('admin.media.*') }}">
+                        <i class="bi bi-folder2-open"></i> <span>Media Manager</span>
+                    </a>
+                </li>
+            @endcan
+
             {{-- Content --}}
             <li class="sidebar-heading">Content</li>
 

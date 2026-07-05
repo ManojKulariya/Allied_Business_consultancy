@@ -85,7 +85,7 @@ if (! function_exists('uploaded_asset')) {
             return Storage::disk('public')->url($path);
         }
 
-        return asset($placeholder);
+        return str_starts_with($placeholder, 'http') ? $placeholder : asset($placeholder);
     }
 }
 
@@ -109,6 +109,75 @@ if (! function_exists('safe_route')) {
         return \Illuminate\Support\Facades\Route::has($name)
             ? route($name, $parameters)
             : '#';
+    }
+}
+
+if (! function_exists('theme_css_vars')) {
+    /**
+     * Build the global CSS custom properties from theme settings.
+     * Rendered into <head> by <x-theme-styles /> on the frontend.
+     */
+    function theme_css_vars(): string
+    {
+        $theme = settings_group('theme');
+
+        $radius = $theme['theme_border_radius'] ?? '0.5rem';
+        $btnRadius = match ($theme['theme_btn_style'] ?? 'rounded') {
+            'pill' => '50rem',
+            'square' => '0',
+            default => $radius,
+        };
+
+        $vars = [
+            '--theme-primary' => $theme['theme_primary_color'] ?? '#0d6efd',
+            '--theme-secondary' => $theme['theme_secondary_color'] ?? '#6c757d',
+            '--theme-accent' => $theme['theme_accent_color'] ?? '#fd7e14',
+            '--theme-font-heading' => "'".($theme['theme_font_heading'] ?? 'Poppins')."', sans-serif",
+            '--theme-font-body' => "'".($theme['theme_font_body'] ?? 'Inter')."', sans-serif",
+            '--theme-font-size' => $theme['theme_font_size_base'] ?? '1rem',
+            '--theme-radius' => $radius,
+            '--theme-btn-radius' => $btnRadius,
+            // Bootstrap 5.3 variable bridge
+            '--bs-primary' => $theme['theme_primary_color'] ?? '#0d6efd',
+            '--bs-secondary' => $theme['theme_secondary_color'] ?? '#6c757d',
+            '--bs-body-font-family' => "'".($theme['theme_font_body'] ?? 'Inter')."', sans-serif",
+            '--bs-border-radius' => $radius,
+        ];
+
+        return collect($vars)
+            ->map(fn ($value, $key) => "{$key}: {$value};")
+            ->implode(' ');
+    }
+}
+
+if (! function_exists('theme_mode')) {
+    /**
+     * Bootstrap color mode for the <html data-bs-theme> attribute.
+     */
+    function theme_mode(): string
+    {
+        return in_array(setting('theme_mode'), ['light', 'dark', 'auto'], true)
+            ? setting('theme_mode')
+            : 'light';
+    }
+}
+
+if (! function_exists('theme_google_fonts_url')) {
+    /**
+     * Google Fonts stylesheet URL for the configured heading/body fonts.
+     */
+    function theme_google_fonts_url(): string
+    {
+        $fonts = array_unique(array_filter([
+            setting('theme_font_heading', 'Poppins'),
+            setting('theme_font_body', 'Inter'),
+        ]));
+
+        $families = collect($fonts)
+            ->map(fn (string $font) => 'family='.str_replace(' ', '+', $font).':wght@400;500;600;700')
+            ->implode('&');
+
+        return "https://fonts.googleapis.com/css2?{$families}&display=swap";
     }
 }
 

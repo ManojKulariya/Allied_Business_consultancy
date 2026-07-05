@@ -189,6 +189,39 @@ body {
     box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.35);
 }
 
+/* ---------- Media Manager ---------- */
+.drop-zone {
+    border: 2px dashed #94a3b8;
+    border-radius: 0.75rem;
+    padding: 2.5rem;
+    text-align: center;
+    color: #64748b;
+    background: rgba(13, 110, 253, 0.04);
+}
+
+.media-card {
+    transition: box-shadow 0.15s ease;
+    cursor: pointer;
+}
+
+.media-card:hover {
+    box-shadow: 0 0.35rem 0.75rem rgba(0, 0, 0, 0.12) !important;
+}
+
+.folder-card:hover {
+    background: #f8fafc;
+}
+
+.picker-item {
+    background: #fff;
+    transition: border-color 0.1s ease, box-shadow 0.1s ease;
+}
+
+.picker-item:hover {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+}
+
 /* ---------- Responsive ---------- */
 .sidebar-backdrop {
     display: none;

@@ -44,22 +44,69 @@ class SettingSeeder extends Seeder
                 'meta_description' => ['Professional business consultancy services: strategy, finance, HR, marketing and more.', 'textarea', 'Default Meta Description'],
                 'meta_keywords' => ['business consultancy, corporate advisory, business strategy', 'textarea', 'Default Meta Keywords'],
                 'og_image' => [null, 'image', 'Default Share Image'],
-                'google_analytics_id' => [null, 'text', 'Google Analytics ID'],
+            ],
+            'theme' => [
+                'theme_primary_color' => ['#0d6efd', 'color', 'Primary Color'],
+                'theme_secondary_color' => ['#6c757d', 'color', 'Secondary Color'],
+                'theme_accent_color' => ['#fd7e14', 'color', 'Accent Color'],
+                'theme_font_heading' => ['Poppins', 'select', 'Heading Font', [
+                    'Poppins' => 'Poppins', 'Montserrat' => 'Montserrat', 'Raleway' => 'Raleway',
+                    'Playfair Display' => 'Playfair Display', 'Inter' => 'Inter', 'Roboto' => 'Roboto',
+                ]],
+                'theme_font_body' => ['Inter', 'select', 'Body Font', [
+                    'Inter' => 'Inter', 'Roboto' => 'Roboto', 'Open Sans' => 'Open Sans',
+                    'Lato' => 'Lato', 'Source Sans 3' => 'Source Sans 3', 'Nunito' => 'Nunito',
+                ]],
+                'theme_font_size_base' => ['1rem', 'select', 'Base Font Size', [
+                    '0.875rem' => 'Small (14px)', '1rem' => 'Normal (16px)', '1.125rem' => 'Large (18px)',
+                ]],
+                'theme_btn_style' => ['rounded', 'select', 'Button Style', [
+                    'rounded' => 'Rounded', 'pill' => 'Pill', 'square' => 'Square',
+                ]],
+                'theme_border_radius' => ['0.5rem', 'select', 'Border Radius', [
+                    '0' => 'None', '0.25rem' => 'Small', '0.5rem' => 'Medium', '1rem' => 'Large',
+                ]],
+                'theme_mode' => ['light', 'select', 'Color Mode', [
+                    'light' => 'Light', 'dark' => 'Dark', 'auto' => 'Auto (system)',
+                ]],
+            ],
+            'mail' => [
+                'mail_host' => [null, 'text', 'SMTP Host'],
+                'mail_port' => ['587', 'text', 'SMTP Port'],
+                'mail_username' => [null, 'text', 'SMTP Username'],
+                'mail_password' => [null, 'password', 'SMTP Password'],
+                'mail_encryption' => ['tls', 'select', 'Encryption', [
+                    'tls' => 'TLS', 'ssl' => 'SSL', '' => 'None',
+                ]],
+                'mail_from_address' => ['noreply@alliedbusiness.com', 'text', 'From Email'],
+                'mail_from_name' => ['Allied Business Consultancy', 'text', 'From Name'],
+                'mail_notification_recipients' => ['admin@alliedbusiness.com', 'text', 'Notification Recipients (comma separated)'],
+            ],
+            'scripts' => [
+                'google_analytics_id' => [null, 'text', 'Google Analytics ID (G-XXXX)'],
+                'google_tag_manager_id' => [null, 'text', 'Google Tag Manager ID'],
+                'facebook_pixel_id' => [null, 'text', 'Facebook Pixel ID'],
+                'head_scripts' => [null, 'textarea', 'Extra <head> Scripts'],
+                'body_scripts' => [null, 'textarea', 'Extra <body> End Scripts'],
+                'custom_css' => [null, 'textarea', 'Custom CSS'],
             ],
         ];
 
         $sortOrder = 0;
         foreach ($settings as $group => $items) {
-            foreach ($items as $key => [$value, $type, $label]) {
+            foreach ($items as $key => $config) {
+                [$value, $type, $label] = $config;
+                $options = $config[3] ?? null;
+
                 Setting::query()->updateOrCreate(
                     ['key' => $key],
                     [
                         'group' => $group,
-                        'value' => $value,
                         'type' => $type,
                         'label' => $label,
+                        'options' => $options ? json_encode($options) : null,
                         'sort_order' => $sortOrder++,
-                    ]
+                    ] + (Setting::query()->where('key', $key)->exists() ? [] : ['value' => $value])
                 );
             }
         }

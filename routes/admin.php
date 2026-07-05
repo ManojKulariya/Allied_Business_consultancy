@@ -120,17 +120,54 @@ Route::middleware(['auth', 'active'])->group(function () {
         });
     }
 
-    /* ----------------------------- Settings ----------------------------- */
-    // Site / header / footer / contact / scripts settings + SEO defaults
-    if (class_exists('App\Http\Controllers\Admin\SettingController')) {
-        Route::middleware('can:settings.edit')->group(function () {
-            Route::get('settings/{group?}', ['App\Http\Controllers\Admin\SettingController', 'edit'])->name('settings.edit');
-            Route::put('settings/{group?}', ['App\Http\Controllers\Admin\SettingController', 'update'])->name('settings.update');
+    /* --------------------------- Media Manager --------------------------- */
+    Route::prefix('media')->name('media.')->middleware('can:media.view')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\MediaController::class, 'index'])->name('index');
+        Route::post('/', [\App\Http\Controllers\Admin\MediaController::class, 'store'])
+            ->middleware('can:media.create')->name('store');
+        Route::post('bulk-delete', [\App\Http\Controllers\Admin\MediaController::class, 'bulkDelete'])
+            ->middleware('can:media.delete')->name('bulk-delete');
+        Route::put('{id}', [\App\Http\Controllers\Admin\MediaController::class, 'update'])
+            ->middleware('can:media.edit')->whereNumber('id')->name('update');
+        Route::delete('{id}', [\App\Http\Controllers\Admin\MediaController::class, 'destroy'])
+            ->middleware('can:media.delete')->whereNumber('id')->name('destroy');
+    });
 
-            Route::get('seo-settings', ['App\Http\Controllers\Admin\SeoSettingController', 'index'])->name('seo-settings.index');
-            Route::put('seo-settings/{id}', ['App\Http\Controllers\Admin\SeoSettingController', 'update'])->name('seo-settings.update');
-        });
-    }
+    Route::prefix('media-folders')->name('media-folders.')->middleware('can:media.view')->group(function () {
+        Route::post('/', [\App\Http\Controllers\Admin\MediaFolderController::class, 'store'])
+            ->middleware('can:media.create')->name('store');
+        Route::put('{folder}', [\App\Http\Controllers\Admin\MediaFolderController::class, 'update'])
+            ->middleware('can:media.edit')->name('update');
+        Route::delete('{folder}', [\App\Http\Controllers\Admin\MediaFolderController::class, 'destroy'])
+            ->middleware('can:media.delete')->name('destroy');
+    });
+
+    /* -------------------------- Homepage Builder -------------------------- */
+    Route::prefix('home-sections')->name('home-sections.')->middleware('can:home-sections.edit')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\HomeSectionController::class, 'index'])->name('index');
+        Route::post('reorder', [\App\Http\Controllers\Admin\HomeSectionController::class, 'reorder'])->name('reorder');
+        Route::patch('{id}/toggle-status', [\App\Http\Controllers\Admin\HomeSectionController::class, 'toggleStatus'])->name('toggle-status');
+        Route::get('{homeSection}/edit', [\App\Http\Controllers\Admin\HomeSectionController::class, 'edit'])->name('edit');
+        Route::put('{homeSection}', [\App\Http\Controllers\Admin\HomeSectionController::class, 'update'])->name('update');
+    });
+
+    /* --------------------------- Notifications --------------------------- */
+    Route::prefix('notifications')->name('notifications.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('index');
+        Route::post('read-all', [\App\Http\Controllers\Admin\NotificationController::class, 'readAll'])->name('read-all');
+        Route::post('{id}/read', [\App\Http\Controllers\Admin\NotificationController::class, 'read'])->name('read');
+        Route::delete('{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('destroy');
+    });
+
+    /* ----------------------------- Settings ----------------------------- */
+    // Site / contact / header / footer / theme / seo / mail / scripts + SEO defaults
+    Route::middleware('can:settings.edit')->group(function () {
+        Route::get('seo-settings', [\App\Http\Controllers\Admin\SeoSettingController::class, 'index'])->name('seo-settings.index');
+        Route::put('seo-settings/{id}', [\App\Http\Controllers\Admin\SeoSettingController::class, 'update'])->name('seo-settings.update');
+
+        Route::get('settings/{group?}', [\App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('settings.edit');
+        Route::put('settings/{group?}', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+    });
 
     /* --------------------------- Activity Logs --------------------------- */
     if (class_exists('App\Http\Controllers\Admin\ActivityLogController')) {
