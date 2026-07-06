@@ -52,6 +52,10 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Contact::observe(\App\Observers\ContactObserver::class);
         \App\Models\JobApplication::observe(\App\Observers\JobApplicationObserver::class);
 
+        // Observers (navigation mega menu cache)
+        \App\Models\Service::observe(\App\Observers\ServicesMenuObserver::class);
+        \App\Models\ServiceCategory::observe(\App\Observers\ServicesMenuObserver::class);
+
         // Policies
         Gate::policy(User::class, UserPolicy::class);
 

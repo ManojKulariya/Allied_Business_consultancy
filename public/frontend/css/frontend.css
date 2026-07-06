@@ -98,6 +98,94 @@ h1, h2, h3, h4, h5, h6 {
 
 .brand-text { color: var(--theme-primary); }
 
+/* ---------- Services mega menu ---------- */
+.mega-dropdown .dropdown-toggle::after { transition: transform .2s ease; }
+.mega-dropdown.show .dropdown-toggle::after,
+.mega-dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+.mega-menu {
+    left: 0;
+    right: 0;
+    top: 100%;
+    border-radius: 0 0 18px 18px;
+    border-top: 3px solid var(--theme-accent) !important;
+    box-shadow: 0 30px 60px rgba(11, 60, 93, .18);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+/* Hover-open on desktop pointers (click/touch still works via Bootstrap) */
+@media (min-width: 992px) and (hover: hover) {
+    .mega-dropdown:hover > .mega-menu {
+        display: block;
+        animation: megaFade .18s ease-out;
+    }
+}
+
+@keyframes megaFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.mega-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    background: color-mix(in srgb, var(--theme-primary) 8%, #fff);
+    color: var(--theme-primary);
+    font-size: 1rem;
+    transition: all .2s ease;
+}
+
+.mega-category-title {
+    color: var(--theme-heading);
+    font-weight: 700;
+    font-size: .92rem;
+}
+
+.mega-category:hover .mega-icon {
+    background: var(--theme-primary);
+    color: var(--theme-accent);
+}
+
+.mega-category-title:hover { color: var(--theme-primary); }
+
+.mega-services { padding-left: 42px; }
+
+.mega-services a {
+    display: block;
+    padding: .18rem 0;
+    font-size: .84rem;
+    color: var(--theme-text);
+    text-decoration: none;
+    transition: color .15s ease, padding-left .15s ease;
+}
+
+.mega-services a:hover {
+    color: var(--theme-secondary);
+    padding-left: 4px;
+}
+
+.mega-services .mega-more {
+    color: var(--theme-accent);
+    font-weight: 600;
+}
+
+.mega-footer {
+    border-top: 1px solid var(--theme-border);
+    background: var(--theme-primary);
+    color: rgba(255, 255, 255, .85);
+    margin-inline: -12px;
+    padding: 1rem 1.5rem !important;
+    border-radius: 12px;
+}
+
+.mobile-services-accordion .accordion-button { box-shadow: none; }
+.mobile-services-accordion .accordion-button:not(.collapsed) {
+    background: color-mix(in srgb, var(--theme-secondary) 6%, #fff);
+    color: var(--theme-primary);
+}
+
 /* ---------- Hero ---------- */
 .hero-section {
     position: relative;

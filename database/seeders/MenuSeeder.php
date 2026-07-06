@@ -15,19 +15,20 @@ class MenuSeeder extends Seeder
             ['name' => 'Header Menu', 'status' => 1]
         );
 
-        if ($header->items()->doesntExist()) {
-            $items = [
-                ['label' => 'Home', 'route_name' => 'frontend.home', 'sort_order' => 1],
-                ['label' => 'About Us', 'route_name' => 'frontend.about', 'sort_order' => 2],
-                ['label' => 'Services', 'route_name' => 'frontend.services.index', 'sort_order' => 3],
-                ['label' => 'Blog', 'route_name' => 'frontend.blogs.index', 'sort_order' => 4],
-                ['label' => 'Careers', 'route_name' => 'frontend.careers.index', 'sort_order' => 5],
-                ['label' => 'Contact Us', 'route_name' => 'frontend.contact', 'sort_order' => 6],
-            ];
+        $headerItems = [
+            ['label' => 'Home', 'route_name' => 'frontend.home', 'sort_order' => 1],
+            ['label' => 'About Us', 'route_name' => 'frontend.about', 'sort_order' => 2],
+            ['label' => 'Services', 'route_name' => 'frontend.services.index', 'sort_order' => 3],
+            ['label' => 'Blog', 'route_name' => 'frontend.blogs.index', 'sort_order' => 4],
+            ['label' => 'Career', 'route_name' => 'frontend.careers.index', 'sort_order' => 5],
+            ['label' => 'Contact', 'route_name' => 'frontend.contact', 'sort_order' => 6],
+        ];
 
-            foreach ($items as $item) {
-                $header->items()->create($item + ['status' => 1]);
-            }
+        foreach ($headerItems as $item) {
+            $header->items()->updateOrCreate(
+                ['route_name' => $item['route_name']],
+                $item + ['status' => 1]
+            );
         }
 
         // Footer quick links

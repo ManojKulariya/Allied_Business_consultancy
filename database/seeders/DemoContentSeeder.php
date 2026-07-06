@@ -23,8 +23,7 @@ class DemoContentSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->serviceCategories();
-        $this->services();
+        // Service categories + services are owned by ServicesArchitectureSeeder
         $this->whyChooseItems();
         $this->counters();
         $this->industries();

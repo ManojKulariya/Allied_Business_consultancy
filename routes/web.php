@@ -39,9 +39,11 @@ Route::name('frontend.')->group(function () {
         Route::get('blog/{blog:slug}', ["{$frontend}\BlogController", 'show'])->name('blogs.show');
     }
 
-    // Services
+    // Services (detail pages are a future phase — the mega menu already
+    // targets these route names via safe_route() and will auto-connect)
     if (class_exists("{$frontend}\ServiceController")) {
         Route::get('services', ["{$frontend}\ServiceController", 'index'])->name('services.index');
+        Route::get('services/category/{serviceCategory:slug}', ["{$frontend}\ServiceController", 'category'])->name('services.category');
         Route::get('services/{service:slug}', ["{$frontend}\ServiceController", 'show'])->name('services.show');
     }
 

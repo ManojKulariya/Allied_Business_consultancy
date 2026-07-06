@@ -63,6 +63,23 @@ if (! function_exists('menu_tree')) {
     }
 }
 
+if (! function_exists('services_menu')) {
+    /**
+     * Active service categories with their active services for the
+     * navigation mega menu (cached; invalidated by ServicesMenuObserver).
+     */
+    function services_menu(): \Illuminate\Support\Collection
+    {
+        return Cache::rememberForever('services.menu', function () {
+            return \App\Models\ServiceCategory::query()
+                ->active()
+                ->ordered()
+                ->with(['activeServices:id,service_category_id,title,slug,sort_order'])
+                ->get(['id', 'name', 'slug', 'icon', 'sort_order']);
+        });
+    }
+}
+
 if (! function_exists('social_links')) {
     /**
      * Get all active social links (cached).
