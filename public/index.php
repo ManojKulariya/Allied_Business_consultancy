@@ -14,10 +14,12 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 require __DIR__.'/../vendor/autoload.php';
 
 // Served from a subdirectory (http://localhost/allied-business) behind a
-// root .htaccess rewrite: strip the prefix so route matching sees clean
-// paths. URL generation stays correct via URL::forceRootUrl(APP_URL).
+// root .htaccess rewrite. Present the front controller as living at the
+// subdirectory root so Symfony detects base URL "/allied-business" —
+// route matching, request URLs, intended redirects and pagination links
+// all then carry the prefix correctly.
 if (str_starts_with($_SERVER['REQUEST_URI'] ?? '', '/allied-business')) {
-    $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], strlen('/allied-business')) ?: '/';
+    $_SERVER['SCRIPT_NAME'] = '/allied-business/index.php';
 }
 
 // Bootstrap Laravel and handle the request...
