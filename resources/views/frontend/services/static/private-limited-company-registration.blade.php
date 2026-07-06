@@ -157,7 +157,7 @@
     {{-- ============ Eligibility + Documents ============ --}}
     <section class="section-pad" id="requirements">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-4 g-lg-5 align-items-start">
                 {{-- Eligibility --}}
                 <div class="col-lg-5" data-aos="fade-right">
                     <span class="section-eyebrow mb-2">Eligibility</span>
@@ -170,12 +170,12 @@
                         ['bi-geo-alt', 'A Registered Office in India', 'Residential or commercial — you only need valid address proof, not owned premises.'],
                     ] as $item)
                         <div class="feature-tile mb-3">
-                            <span class="icon-badge" style="width: 48px; height: 48px; min-width: 48px; font-size: 1.25rem;">
+                            <span class="icon-badge" style="width: 46px; height: 46px; min-width: 46px; font-size: 1.2rem;">
                                 <i class="bi {{ $item[0] }}"></i>
                             </span>
                             <div>
-                                <h6 class="mb-1">{{ $item[1] }}</h6>
-                                <p class="small mb-0">{{ $item[2] }}</p>
+                                <h6 class="mb-1 small fw-bold">{{ $item[1] }}</h6>
+                                <p class="small mb-0 text-muted">{{ $item[2] }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -228,7 +228,7 @@
                 <p class="text-muted">Typical timeline: 7–10 working days, subject to MCA approvals</p>
             </div>
 
-            <div class="row g-5 position-relative process-line">
+            <div class="row g-4 g-lg-5 justify-content-center position-relative process-line">
                 @foreach([
                     ['bi-chat-dots', 'Free Consultation', 'We understand your business and confirm the right structure for you.'],
                     ['bi-folder-check', 'Documents & DSC', 'We collect your documents and issue digital signatures for all directors.'],
@@ -236,12 +236,12 @@
                     ['bi-file-earmark-arrow-up', 'Incorporation Filing', 'SPICe+ Part B with MOA & AOA is drafted and filed with the ROC.'],
                     ['bi-patch-check', 'Certificate Issued', 'You receive the COI with CIN, plus company PAN and TAN — ready to operate.'],
                 ] as $i => [$icon, $title, $text])
-                    <div class="col-md-6 col-lg" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
+                    <div class="col-6 col-md-4 col-lg" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
                         <div class="process-step">
                             <span class="process-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                            <div class="mt-3 fs-3" style="color: var(--theme-secondary);"><i class="bi {{ $icon }}"></i></div>
-                            <h6 class="mt-2 mb-2">{{ $title }}</h6>
-                            <p class="small mb-0">{{ $text }}</p>
+                            <div class="step-icon"><i class="bi {{ $icon }}"></i></div>
+                            <h6>{{ $title }}</h6>
+                            <p class="small mb-0 text-muted">{{ $text }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -252,51 +252,56 @@
     {{-- ============ Why Allied + FAQ ============ --}}
     <section class="section-pad" id="why-allied">
         <div class="container">
-            <div class="row g-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="section-eyebrow mb-2">Why Allied Business</span>
+                <h2 class="section-title">Registration, Minus the Headache</h2>
+            </div>
+
+            <div class="row g-4 g-lg-5 align-items-start">
                 {{-- Why choose us + mini CTA --}}
-                <div class="col-lg-4" data-aos="fade-right">
-                    <span class="section-eyebrow mb-2">Why Allied Business</span>
-                    <h2 class="section-title mb-4">Registration, Minus the Headache</h2>
+                <div class="col-lg-5" data-aos="fade-right">
+                    @foreach([
+                        ['bi-mortarboard', 'Experienced Professionals', 'Chartered Accountants & Company Secretaries handle your filing.'],
+                        ['bi-tags', 'Transparent Pricing', 'One fixed fee agreed upfront — no hidden charges, ever.'],
+                        ['bi-lightning', 'Fast Processing', 'Same-day document processing and proactive MCA follow-ups.'],
+                        ['bi-headset', 'Expert Support', 'A dedicated expert answers your questions at every step.'],
+                        ['bi-arrow-repeat', 'End-to-End Assistance', 'From name search to post-incorporation compliance calendar.'],
+                    ] as $item)
+                        <div class="feature-tile mb-3">
+                            <span class="icon-badge" style="width: 46px; height: 46px; min-width: 46px; font-size: 1.2rem;">
+                                <i class="bi {{ $item[0] }}"></i>
+                            </span>
+                            <div>
+                                <h6 class="mb-1 small fw-bold">{{ $item[1] }}</h6>
+                                <p class="small mb-0 text-muted">{{ $item[2] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
 
-                    <ul class="list-unstyled d-grid gap-3 mb-4">
-                        @foreach([
-                            ['bi-mortarboard', 'Experienced Professionals', 'Chartered Accountants & Company Secretaries handle your filing.'],
-                            ['bi-tags', 'Transparent Pricing', 'One fixed fee agreed upfront — no hidden charges, ever.'],
-                            ['bi-lightning', 'Fast Processing', 'Same-day document processing and proactive MCA follow-ups.'],
-                            ['bi-headset', 'Expert Support', 'A dedicated expert answers your questions at every step.'],
-                            ['bi-arrow-repeat', 'End-to-End Assistance', 'From name search to post-incorporation compliance calendar.'],
-                        ] as $item)
-                            <li class="d-flex gap-3">
-                                <i class="bi {{ $item[0] }} fs-4" style="color: var(--theme-accent);"></i>
-                                <div>
-                                    <strong class="d-block small" style="color: var(--theme-heading);">{{ $item[1] }}</strong>
-                                    <span class="small text-muted">{{ $item[2] }}</span>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-
-                    <div class="service-cta-card p-4">
+                    <div class="service-cta-card p-4 p-lg-5 mt-4">
                         <div class="accent-line mb-3"></div>
                         <h5 class="text-white mb-2">Get a Free Consultation</h5>
-                        <p class="small mb-3" style="color: rgba(255,255,255,.7);">
+                        <p class="small mb-4" style="color: rgba(255,255,255,.72);">
                             Speak to a company registration expert — free, no obligations.
                         </p>
-                        <a href="{{ url('/contact-us') }}" class="btn btn-accent w-100 mb-2">Request a Callback</a>
-                        @if(setting('contact_phone'))
-                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('contact_phone')) }}"
-                               class="btn btn-outline-light w-100">
-                                <i class="bi bi-telephone me-1"></i>{{ setting('contact_phone') }}
-                            </a>
-                        @endif
+                        <div class="d-grid gap-2">
+                            <a href="{{ url('/contact-us') }}" class="btn btn-accent">Request a Callback</a>
+                            @if(setting('contact_phone'))
+                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('contact_phone')) }}"
+                                   class="btn btn-outline-light">
+                                    <i class="bi bi-telephone me-1"></i>{{ setting('contact_phone') }}
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
                 {{-- FAQ --}}
-                <div class="col-lg-8" data-aos="fade-left">
-                    <span class="section-eyebrow mb-2">FAQs</span>
-                    <h2 class="section-title mb-4">Frequently Asked Questions</h2>
-
+                <div class="col-lg-7" data-aos="fade-left">
+                    <h3 class="h5 mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-question-circle" style="color: var(--theme-accent);"></i>
+                        Frequently Asked Questions
+                    </h3>
                     <div class="accordion faq-accordion" id="plcFaq">
                         @foreach([
                             ['How long does private limited company registration take?', 'Typically 7–10 working days from the day we receive your complete documents, depending on MCA name approval and processing times.'],
@@ -328,7 +333,7 @@
     </section>
 
     {{-- ============ Final CTA ============ --}}
-    <section class="section-pad py-5">
+    <section class="pb-5">
         <div class="container">
             <div class="cta-section p-5 text-center" data-aos="zoom-in">
                 <div class="position-relative">

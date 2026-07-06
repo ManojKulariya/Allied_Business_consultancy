@@ -344,7 +344,22 @@ h1, h2, h3, h4, h5, h6 {
 .stat-icon-lg { font-size: 2rem; color: var(--theme-accent); opacity: .9; }
 
 /* ---------- Process timeline ---------- */
-.process-step { position: relative; text-align: center; padding: 0 1rem; }
+.process-step {
+    position: relative;
+    text-align: center;
+    padding: 0 .75rem;
+    max-width: 300px;
+    margin-inline: auto;
+}
+
+.process-step .step-icon {
+    font-size: 1.6rem;
+    color: var(--theme-secondary);
+    margin-top: 1rem;
+    line-height: 1;
+}
+
+.process-step h6 { margin-top: .75rem; margin-bottom: .5rem; }
 
 .process-num {
     width: 68px;
@@ -437,10 +452,16 @@ h1, h2, h3, h4, h5, h6 {
 /* ---------- FAQ ---------- */
 .faq-accordion .accordion-item {
     border: 1px solid var(--theme-border) !important;
-    border-radius: 12px !important;
-    margin-bottom: .8rem;
+    border-radius: 16px !important;
+    margin-bottom: .85rem;
     overflow: hidden;
     background: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.faq-accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
+    border-color: color-mix(in srgb, var(--theme-secondary) 35%, var(--theme-border)) !important;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, .06);
 }
 
 .faq-accordion .accordion-button {
@@ -448,13 +469,22 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--theme-heading);
     background: #fff;
     box-shadow: none;
-    padding: 1.1rem 1.3rem;
+    padding: 1.2rem 1.4rem;
+    transition: background .2s ease, color .2s ease;
 }
+
+.faq-accordion .accordion-button:hover {
+    background: color-mix(in srgb, var(--theme-secondary) 4%, #fff);
+}
+
+.faq-accordion .accordion-button::after { transition: transform .25s ease; }
 
 .faq-accordion .accordion-button:not(.collapsed) {
     color: var(--theme-secondary);
     background: color-mix(in srgb, var(--theme-secondary) 5%, #fff);
 }
+
+.faq-accordion .accordion-body { padding: .35rem 1.4rem 1.25rem; color: var(--theme-text); }
 
 /* ---------- CTA ---------- */
 .cta-section {
@@ -589,10 +619,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .trust-chip i { color: var(--theme-accent); }
 
+/* Equal-height CTA buttons + aligned icons on service hero */
+.service-hero .btn-lg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+}
+
 /* Hero illustration composition (pure CSS/icons — no image request) */
 .hero-illustration {
     position: relative;
-    min-height: 320px;
 }
 
 .hero-illustration .ill-panel {
@@ -635,40 +672,58 @@ h1, h2, h3, h4, h5, h6 {
 .doc-card {
     background: #fff;
     border: 1px dashed var(--theme-border);
-    border-radius: 14px;
-    padding: 1.1rem;
+    border-radius: 16px;
+    padding: 1rem 1.15rem;
     display: flex;
     align-items: center;
-    gap: .8rem;
+    gap: .85rem;
     height: 100%;
-    transition: border-color .2s ease, transform .2s ease;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 
-.doc-card:hover { border-color: var(--theme-accent); transform: translateY(-3px); }
+.doc-card:hover {
+    border-color: var(--theme-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, .07);
+}
 
-.doc-card i { font-size: 1.4rem; color: var(--theme-secondary); }
+.doc-card i {
+    font-size: 1.35rem;
+    color: var(--theme-secondary);
+    width: 28px;
+    min-width: 28px;
+    text-align: center;
+}
 
-/* Numbered feature list (why choose us) */
+/* Compact feature tiles (eligibility / why-us) — height grows with content
+   only; never stretched to fill a column. */
 .feature-tile {
     display: flex;
+    align-items: flex-start;
     gap: 1rem;
     background: #fff;
     border: 1px solid var(--theme-border);
     border-radius: 16px;
-    padding: 1.25rem;
-    height: 100%;
-    transition: box-shadow .25s ease, transform .25s ease;
+    padding: 1.1rem 1.25rem;
+    transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
 }
 
-.feature-tile:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(15, 23, 42, .1); }
+.feature-tile:hover {
+    transform: translateY(-3px);
+    border-color: transparent;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, .1);
+}
 
-/* Sticky mini-CTA card on service pages */
+.feature-tile p { line-height: 1.5; }
+
+/* Mini-CTA card on service pages (static — no sticky overlap) */
 .service-cta-card {
-    background: linear-gradient(160deg, var(--theme-primary), color-mix(in srgb, var(--theme-primary) 70%, #000));
-    border-radius: 18px;
+    background:
+        radial-gradient(420px 180px at 110% -20%, rgba(212, 175, 55, .25), transparent 60%),
+        radial-gradient(300px 160px at -20% 120%, rgba(31, 111, 235, .3), transparent 60%),
+        linear-gradient(160deg, var(--theme-primary), color-mix(in srgb, var(--theme-primary) 70%, #000));
+    border-radius: 16px;
     color: #fff;
-    position: sticky;
-    top: 96px;
 }
 
 .service-cta-card .accent-line { width: 44px; height: 3px; background: var(--theme-accent); border-radius: 2px; }
