@@ -56,7 +56,7 @@
                                 <div class="col-md-9">
                                     <label class="form-label">Schema Markup (JSON-LD)</label>
                                     <textarea name="schema_markup" rows="4" class="form-control font-monospace small @error('schema_markup') is-invalid @enderror"
-                                              placeholder='{"@context": "https://schema.org", ...}'>{{ old('schema_markup', $seo->schema_markup) }}</textarea>
+                                              placeholder='{"@@context": "https://schema.org", ...}'>{{ old('schema_markup', $seo->schema_markup) }}</textarea>
                                     @error('schema_markup')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

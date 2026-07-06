@@ -6,21 +6,26 @@
             </div>
         @endcan
 
+        @php
+            // Built here because @json splits its directive arguments on
+            // commas — passing an inline array corrupts the compiled PHP.
+            $mediaDetails = [
+                'id' => $media->id,
+                'name' => $media->name,
+                'file_name' => $media->file_name,
+                'alt_text' => $media->alt_text,
+                'url' => $media->url,
+                'thumb' => $media->thumb_url,
+                'type' => $media->type,
+                'size' => $media->human_size,
+                'dimensions' => $media->width ? "{$media->width} × {$media->height}px" : null,
+                'uploaded' => $media->created_at->format('d M Y, h:i A'),
+                'path' => $media->file_path,
+            ];
+        @endphp
         <button type="button"
                 class="media-thumb border-0 bg-transparent p-0 w-100"
-                data-details='@json([
-                    "id" => $media->id,
-                    "name" => $media->name,
-                    "file_name" => $media->file_name,
-                    "alt_text" => $media->alt_text,
-                    "url" => $media->url,
-                    "thumb" => $media->thumb_url,
-                    "type" => $media->type,
-                    "size" => $media->human_size,
-                    "dimensions" => $media->width ? "{$media->width} × {$media->height}px" : null,
-                    "uploaded" => $media->created_at->format("d M Y, h:i A"),
-                    "path" => $media->file_path,
-                ])'>
+                data-details='@json($mediaDetails)'>
             @if($media->isImage())
                 <img src="{{ $media->thumb_url }}" alt="{{ $media->alt_text ?? $media->name }}"
                      class="card-img-top" loading="lazy"
