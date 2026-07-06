@@ -1,4 +1,4 @@
-{{-- Our process — timeline from the Process Steps module --}}
+﻿{{-- Our process — timeline from the Process Steps module --}}
 @php $steps = \App\Models\ProcessStep::query()->active()->ordered()->get(); @endphp
 
 @if($steps->isNotEmpty())
@@ -9,7 +9,7 @@
                 <h2 class="section-title">{{ $section->title }}</h2>
             </div>
 
-            <div class="row g-5 position-relative process-line">
+            <div class="row g-4 g-lg-5 position-relative process-line">
                 @foreach($steps as $step)
                     <div class="col-md-6 col-lg-{{ 12 / min(max($steps->count(), 1), 4) }}"
                          data-aos="fade-up" data-aos-delay="{{ ($loop->index % 4) * 120 }}">

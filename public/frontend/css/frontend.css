@@ -9,6 +9,23 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Images may never overflow their container. Images sized via height
+   attribute (logo, avatars, signature) keep their intended height. */
+img { max-width: 100%; }
+img:not([height]) { height: auto; }
+
+/* AOS fade-left/right park elements ±100px sideways before animating in,
+   which widens the page until they enter the viewport. Shorten the travel
+   distance (root fix)… */
+html:not(.no-js) [data-aos="fade-left"] { transform: translate3d(36px, 0, 0); }
+html:not(.no-js) [data-aos="fade-right"] { transform: translate3d(-36px, 0, 0); }
+
+/* …and clip the transient pre-animation offsets at the content edge.
+   overflow-x: clip does NOT create a scroll container (unlike hidden) —
+   all static overflow causes are fixed at the source; this only guards
+   the animation library's momentary off-screen states. */
+main { overflow-x: clip; }
+
 h1, h2, h3, h4, h5, h6 {
     color: var(--theme-heading);
     font-weight: 700;
@@ -221,7 +238,6 @@ h1, h2, h3, h4, h5, h6 {
 .hero-title .highlight {
     color: var(--theme-accent);
     position: relative;
-    white-space: nowrap;
 }
 
 .hero-desc { color: rgba(255, 255, 255, .78); max-width: 540px; font-size: 1.06rem; }
@@ -262,8 +278,9 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.2rem;
 }
 
-.floating-card.pos-1 { top: 8%; left: -6%; animation-delay: 0s; }
-.floating-card.pos-2 { bottom: 10%; right: -4%; animation-delay: 2s; }
+/* Overhang stays within the column's px-lg-4 (24px) padding — never the viewport */
+.floating-card.pos-1 { top: 8%; left: -12px; animation-delay: 0s; }
+.floating-card.pos-2 { bottom: 10%; right: -12px; animation-delay: 2s; }
 
 @keyframes floatY {
     0%, 100% { transform: translateY(0); }
@@ -625,6 +642,16 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     min-height: 54px;
+}
+
+/* Phones: hero CTAs go full width for comfortable tapping */
+@media (max-width: 575.98px) {
+    .service-hero .btn-lg,
+    .hero-section .btn-lg {
+        width: 100%;
+    }
+
+    .hero-min { min-height: auto; }
 }
 
 /* Hero illustration composition (pure CSS/icons — no image request) */

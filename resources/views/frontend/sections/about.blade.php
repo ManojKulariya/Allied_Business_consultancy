@@ -1,8 +1,8 @@
-{{-- About — heading, description, image, mission, vision, features,
+﻿{{-- About — heading, description, image, mission, vision, features,
      experience & signature all from Homepage Builder → About --}}
 <section class="section-pad" id="section-about">
     <div class="container">
-        <div class="row align-items-center g-5">
+        <div class="row align-items-center g-4 g-lg-5">
             <div class="col-lg-6" data-aos="fade-right">
                 <div class="position-relative">
                     @if($section->background_image)

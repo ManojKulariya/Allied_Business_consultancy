@@ -1,4 +1,4 @@
-{{-- Static service page (pre-CMS): Private Limited Company Registration.
+﻿{{-- Static service page (pre-CMS): Private Limited Company Registration.
      URL: /services/private-limited-company-registration — same URL the
      dynamic services module will use later. --}}
 @extends('frontend.layouts.app')
@@ -22,7 +22,7 @@
                 </ol>
             </nav>
 
-            <div class="row align-items-center g-5">
+            <div class="row align-items-center g-4 g-lg-5">
                 <div class="col-lg-7" data-aos="fade-right">
                     <span class="hero-eyebrow mb-3"><i class="bi bi-building-add me-1 text-accent"></i> Business Registration</span>
                     <h1 class="mt-3 mb-3">Private Limited Company Registration</h1>

@@ -1,4 +1,4 @@
-{{-- Hero banner — every field managed in Homepage Builder → Hero
+﻿{{-- Hero banner — every field managed in Homepage Builder → Hero
      (title, highlight, small heading, description, buttons, images,
       floating cards, experience badge, stats, optional video) --}}
 @php
@@ -22,7 +22,7 @@
     @endif
 
     <div class="container position-relative">
-        <div class="row align-items-center hero-min py-5 g-5">
+        <div class="row align-items-center hero-min py-5 g-4 g-lg-5">
             <div class="col-lg-6" data-aos="fade-right">
                 @if($section->dataValue('small_heading'))
                     <span class="hero-eyebrow mb-3">
