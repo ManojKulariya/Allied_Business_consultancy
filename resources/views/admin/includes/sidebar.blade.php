@@ -99,7 +99,19 @@
                 <li class="nav-item"><a href="{{ safe_route('admin.partners.index') }}" class="nav-link"><i class="bi bi-people"></i> <span>Partners</span></a></li>
             @endcan
             @can('faqs.view')
-                <li class="nav-item"><a href="{{ safe_route('admin.faqs.index') }}" class="nav-link"><i class="bi bi-question-circle"></i> <span>FAQs</span></a></li>
+                <li class="nav-item"><a href="{{ safe_route('admin.faqs.index') }}" class="nav-link {{ active_menu('admin.faqs.*') }}"><i class="bi bi-question-circle"></i> <span>FAQs</span></a></li>
+            @endcan
+            @can('industries.view')
+                <li class="nav-item"><a href="{{ safe_route('admin.industries.index') }}" class="nav-link {{ active_menu('admin.industries.*') }}"><i class="bi bi-diagram-3"></i> <span>Industries</span></a></li>
+            @endcan
+            @can('process-steps.view')
+                <li class="nav-item"><a href="{{ safe_route('admin.process-steps.index') }}" class="nav-link {{ active_menu('admin.process-steps.*') }}"><i class="bi bi-signpost-split"></i> <span>Process Steps</span></a></li>
+            @endcan
+            @can('why-choose-items.view')
+                <li class="nav-item"><a href="{{ safe_route('admin.why-choose-items.index') }}" class="nav-link {{ active_menu('admin.why-choose-items.*') }}"><i class="bi bi-patch-check"></i> <span>Why Choose Us</span></a></li>
+            @endcan
+            @can('counters.view')
+                <li class="nav-item"><a href="{{ safe_route('admin.counters.index') }}" class="nav-link {{ active_menu('admin.counters.*') }}"><i class="bi bi-123"></i> <span>Counters</span></a></li>
             @endcan
 
             {{-- HR --}}

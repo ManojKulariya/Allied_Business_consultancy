@@ -129,19 +129,28 @@ if (! function_exists('theme_css_vars')) {
         };
 
         $vars = [
-            '--theme-primary' => $theme['theme_primary_color'] ?? '#0d6efd',
-            '--theme-secondary' => $theme['theme_secondary_color'] ?? '#6c757d',
-            '--theme-accent' => $theme['theme_accent_color'] ?? '#fd7e14',
+            '--theme-primary' => $theme['theme_primary_color'] ?? '#0B3C5D',
+            '--theme-secondary' => $theme['theme_secondary_color'] ?? '#1F6FEB',
+            '--theme-accent' => $theme['theme_accent_color'] ?? '#D4AF37',
+            '--theme-bg' => $theme['theme_bg_color'] ?? '#F8FAFC',
+            '--theme-heading' => $theme['theme_heading_color'] ?? '#1E293B',
+            '--theme-text' => $theme['theme_text_color'] ?? '#64748B',
+            '--theme-border' => $theme['theme_border_color'] ?? '#E2E8F0',
             '--theme-font-heading' => "'".($theme['theme_font_heading'] ?? 'Poppins')."', sans-serif",
             '--theme-font-body' => "'".($theme['theme_font_body'] ?? 'Inter')."', sans-serif",
             '--theme-font-size' => $theme['theme_font_size_base'] ?? '1rem',
             '--theme-radius' => $radius,
             '--theme-btn-radius' => $btnRadius,
             // Bootstrap 5.3 variable bridge
-            '--bs-primary' => $theme['theme_primary_color'] ?? '#0d6efd',
-            '--bs-secondary' => $theme['theme_secondary_color'] ?? '#6c757d',
+            '--bs-primary' => $theme['theme_primary_color'] ?? '#0B3C5D',
+            '--bs-secondary' => $theme['theme_secondary_color'] ?? '#1F6FEB',
             '--bs-body-font-family' => "'".($theme['theme_font_body'] ?? 'Inter')."', sans-serif",
+            '--bs-body-bg' => $theme['theme_bg_color'] ?? '#F8FAFC',
+            '--bs-body-color' => $theme['theme_text_color'] ?? '#64748B',
+            '--bs-heading-color' => $theme['theme_heading_color'] ?? '#1E293B',
+            '--bs-border-color' => $theme['theme_border_color'] ?? '#E2E8F0',
             '--bs-border-radius' => $radius,
+            '--bs-link-color' => $theme['theme_secondary_color'] ?? '#1F6FEB',
         ];
 
         return collect($vars)

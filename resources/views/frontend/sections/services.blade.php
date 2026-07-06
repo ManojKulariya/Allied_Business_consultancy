@@ -1,33 +1,53 @@
-{{-- Services grid --}}
+{{-- Services grid — cards from the Services module --}}
 @php
     $services = \App\Models\Service::query()
         ->active()
-        ->when($section->dataValue('show_featured_only') === '1', fn ($q) => $q->featured())
         ->ordered()
         ->limit((int) $section->dataValue('limit', 6))
         ->get();
 @endphp
 
-<x-frontend.section-wrapper :section="$section" class="bg-light">
-    <div class="row g-4">
-        @forelse($services as $service)
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm text-center p-3">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <i class="bi {{ $service->icon ?: 'bi-briefcase' }} display-6 text-primary"></i>
-                        </div>
-                        <h5 class="card-title">{{ $service->title }}</h5>
-                        <p class="card-text text-muted small">{{ Str::limit($service->excerpt, 110) }}</p>
-                        <a href="{{ safe_route('frontend.services.show', $service) }}" class="stretched-link small text-decoration-none">
-                            Learn More <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+@if($services->isNotEmpty())
+    <section class="section-pad" id="section-services" style="background: #fff;">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                @if($section->subtitle)<span class="section-eyebrow mb-2">{{ $section->subtitle }}</span>@endif
+                <h2 class="section-title">{{ $section->title }}</h2>
             </div>
-        @empty
-            <div class="col-12 text-center text-muted">Services coming soon.</div>
-        @endforelse
-    </div>
-    <x-frontend.cta-buttons :section="$section" class="mt-4" />
-</x-frontend.section-wrapper>
+
+            <div class="row g-4">
+                @foreach($services as $service)
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
+                        <div class="premium-card p-4 position-relative">
+                            @if($service->is_featured)
+                                <span class="badge position-absolute top-0 end-0 mt-3 me-3"
+                                      style="background: var(--theme-accent); color: #1a1a1a;">Featured</span>
+                            @endif
+
+                            @if($service->image)
+                                <img src="{{ uploaded_asset($service->image) }}" alt="{{ $service->title }}"
+                                     class="rounded-3 mb-3 w-100" style="aspect-ratio: 16/9; object-fit: cover;" loading="lazy">
+                            @else
+                                <span class="icon-badge mb-3"><i class="bi {{ $service->icon ?: 'bi-briefcase' }}"></i></span>
+                            @endif
+
+                            <h5 class="mb-2">{{ $service->title }}</h5>
+                            <p class="small mb-3">{{ Str::limit($service->excerpt, 120) }}</p>
+                            <a href="{{ safe_route('frontend.services.show', $service) }}" class="card-link">
+                                Learn More <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            @if($section->cta_text)
+                <div class="text-center mt-5" data-aos="fade-up">
+                    <a href="{{ url($section->cta_url ?: '/services') }}" class="btn btn-primary px-4">
+                        {{ $section->cta_text }} <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            @endif
+        </div>
+    </section>
+@endif

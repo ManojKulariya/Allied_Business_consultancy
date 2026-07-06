@@ -69,18 +69,38 @@
                     </div>
                 </div>
 
-                {{-- Flexible per-section fields --}}
+                {{-- Flexible per-section fields (typed by key naming convention) --}}
                 @if($section->data)
                     <div class="card mb-3">
                         <div class="card-header">Section Options</div>
                         <div class="card-body">
                             <div class="row g-3">
                                 @foreach($section->data as $key => $value)
-                                    <div class="col-md-6">
-                                        <label class="form-label text-capitalize">{{ str_replace('_', ' ', $key) }}</label>
-                                        <input type="text" name="data[{{ $key }}]" class="form-control"
-                                               value="{{ old('data.'.$key, $value) }}">
-                                    </div>
+                                    @php
+                                        $label = Str::headline($key);
+                                        $isImage = Str::endsWith($key, '_image') || Str::startsWith($key, 'bg_image');
+                                        $isLong = Str::contains($key, ['description', 'mission', 'vision', 'features', '_text']) && ! Str::contains($key, ['button', 'card_']);
+                                    @endphp
+                                    @if($isImage)
+                                        <div class="col-md-6">
+                                            <x-admin.media-picker :name="'data['.$key.']'" :label="$label"
+                                                                  :value="old('data.'.$key, $value) ?? ''" />
+                                        </div>
+                                    @elseif($isLong)
+                                        <div class="col-12">
+                                            <label class="form-label">{{ $label }}</label>
+                                            <textarea name="data[{{ $key }}]" rows="2" class="form-control">{{ old('data.'.$key, $value) }}</textarea>
+                                            @if($key === 'features')
+                                                <div class="form-text">Comma-separated list — each item becomes a checkmark bullet</div>
+                                            @endif
+                                        </div>
+                                    @else
+                                        <div class="col-md-6">
+                                            <label class="form-label">{{ $label }}</label>
+                                            <input type="text" name="data[{{ $key }}]" class="form-control"
+                                                   value="{{ old('data.'.$key, $value) }}">
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

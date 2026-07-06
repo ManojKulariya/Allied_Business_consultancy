@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             SeoSettingSeeder::class,
             SocialLinkSeeder::class,
             HomeSectionSeeder::class,
+            DemoContentSeeder::class,
         ]);
     }
 }

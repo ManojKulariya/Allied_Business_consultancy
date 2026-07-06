@@ -31,6 +31,9 @@ abstract class BaseCrudService
     /** Columns allowed for ?sort= (whitelist — never trust raw input). */
     protected array $sortable = ['id', 'sort_order', 'created_at'];
 
+    /** Default sort direction when none requested. */
+    protected string $defaultDirection = 'desc';
+
     /** request_field => upload_directory map for auto file handling. */
     protected array $fileFields = [];
 
@@ -69,8 +72,10 @@ abstract class BaseCrudService
         $sort = in_array($request->query('sort'), $this->sortable, true)
             ? $request->query('sort')
             : $this->sortable[0];
-        $direction = $request->query('direction') === 'asc' ? 'asc' : 'desc';
-        $query->orderBy($sort, $direction);
+        $direction = in_array($request->query('direction'), ['asc', 'desc'], true)
+            ? $request->query('direction')
+            : $this->defaultDirection;
+        $query->orderBy($sort, $direction)->orderByDesc($query->getModel()->getKeyName());
 
         return $query->paginate($perPage)->withQueryString();
     }
@@ -165,16 +170,22 @@ abstract class BaseCrudService
 
     /**
      * Upload configured file fields and clean up replaced files.
+     * Media-picker fields submit library paths (strings) and pass straight
+     * through — only raw file inputs need processing here.
      */
     protected function handleFileUploads(array $data, ?Model $existing = null): array
     {
         foreach ($this->fileFields as $field => $directory) {
-            if (($data[$field] ?? null) instanceof UploadedFile) {
+            $value = $data[$field] ?? null;
+
+            if ($value instanceof UploadedFile) {
                 $data[$field] = $existing
-                    ? $this->replaceFile($data[$field], $existing->getRawOriginal($field), $directory)
-                    : $this->uploadFile($data[$field], $directory);
+                    ? $this->replaceFile($value, $existing->getRawOriginal($field), $directory)
+                    : $this->uploadFile($value, $directory);
+            } elseif (is_string($value)) {
+                $data[$field] = $value !== '' ? $value : null; // media picker path / cleared
             } else {
-                unset($data[$field]); // keep existing value when no new upload
+                unset($data[$field]); // keep existing value when nothing submitted
             }
         }
 

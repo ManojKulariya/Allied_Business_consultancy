@@ -6,49 +6,69 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Frontend Routes  (name: frontend.)
 |--------------------------------------------------------------------------
-| Controllers land in the page-building phase. The route map below is
-| final so menus, SEO settings and sitemaps can reference stable names.
+| Each controller's routes register only once that controller exists,
+| so safe_route() yields '#' for pages not yet built — no dead 500 links.
 */
 
 Route::name('frontend.')->group(function () {
     $frontend = 'App\Http\Controllers\Frontend';
 
+    // Home
     if (class_exists("{$frontend}\HomeController")) {
         Route::get('/', ["{$frontend}\HomeController", 'index'])->name('home');
+    } else {
+        Route::get('/', fn () => view('welcome'))->name('home');
+    }
 
-        // Static-ish pages
-        Route::get('about-us', ["{$frontend}\PageController", 'about'])->name('about');
-        Route::get('contact-us', ["{$frontend}\ContactController", 'index'])->name('contact');
-        Route::post('contact-us', ["{$frontend}\ContactController", 'store'])->name('contact.store');
-
-        // Newsletter
+    // Newsletter
+    if (class_exists("{$frontend}\NewsletterController")) {
         Route::post('newsletter/subscribe', ["{$frontend}\NewsletterController", 'subscribe'])->name('newsletter.subscribe');
         Route::get('newsletter/unsubscribe/{token}', ["{$frontend}\NewsletterController", 'unsubscribe'])->name('newsletter.unsubscribe');
+    }
 
-        // Blog
+    // Contact
+    if (class_exists("{$frontend}\ContactController")) {
+        Route::get('contact-us', ["{$frontend}\ContactController", 'index'])->name('contact');
+        Route::post('contact-us', ["{$frontend}\ContactController", 'store'])->name('contact.store');
+    }
+
+    // Blog
+    if (class_exists("{$frontend}\BlogController")) {
         Route::get('blog', ["{$frontend}\BlogController", 'index'])->name('blogs.index');
         Route::get('blog/category/{blogCategory:slug}', ["{$frontend}\BlogController", 'category'])->name('blogs.category');
         Route::get('blog/{blog:slug}', ["{$frontend}\BlogController", 'show'])->name('blogs.show');
+    }
 
-        // Services
+    // Services
+    if (class_exists("{$frontend}\ServiceController")) {
         Route::get('services', ["{$frontend}\ServiceController", 'index'])->name('services.index');
         Route::get('services/{service:slug}', ["{$frontend}\ServiceController", 'show'])->name('services.show');
+    }
 
-        // Team, gallery, testimonials, FAQs
+    // Team, gallery, testimonials, FAQs
+    if (class_exists("{$frontend}\TeamController")) {
         Route::get('our-team', ["{$frontend}\TeamController", 'index'])->name('teams.index');
+    }
+    if (class_exists("{$frontend}\GalleryController")) {
         Route::get('gallery', ["{$frontend}\GalleryController", 'index'])->name('galleries.index');
+    }
+    if (class_exists("{$frontend}\TestimonialController")) {
         Route::get('testimonials', ["{$frontend}\TestimonialController", 'index'])->name('testimonials.index');
+    }
+    if (class_exists("{$frontend}\FaqController")) {
         Route::get('faqs', ["{$frontend}\FaqController", 'index'])->name('faqs.index');
+    }
 
-        // Careers
+    // Careers
+    if (class_exists("{$frontend}\CareerController")) {
         Route::get('careers', ["{$frontend}\CareerController", 'index'])->name('careers.index');
         Route::get('careers/{career:slug}', ["{$frontend}\CareerController", 'show'])->name('careers.show');
         Route::post('careers/{career:slug}/apply', ["{$frontend}\CareerController", 'apply'])->name('careers.apply');
+    }
 
-        // Dynamic CMS pages — keep LAST (catch-all slug)
+    // Dynamic CMS pages — keep LAST (catch-all slug)
+    if (class_exists("{$frontend}\PageController")) {
+        Route::get('about-us', ["{$frontend}\PageController", 'about'])->name('about');
         Route::get('{page:slug}', ["{$frontend}\PageController", 'show'])->name('page');
-    } else {
-        // Placeholder until the frontend phase is built
-        Route::get('/', fn () => view('welcome'))->name('home');
     }
 });

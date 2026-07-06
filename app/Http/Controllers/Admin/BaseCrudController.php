@@ -17,7 +17,14 @@ use Illuminate\View\View;
  *  - $viewPrefix    : e.g. 'admin.blogs'
  *  - $routePrefix   : e.g. 'admin.blogs'
  *  - $title         : e.g. 'Blog'
+ *  - $permission    : e.g. 'blogs' (module permission prefix for view checks)
  *  - $storeRequest / $updateRequest : FormRequest class names
+ *  - columns()      : index table definition (generic view)
+ *  - fields()       : form definition (generic view)
+ *
+ * Views resolve to "{viewPrefix}.index|form" when those Blade files exist,
+ * otherwise the shared generic views (admin.crud.*) render from config —
+ * so simple modules need ZERO view files.
  *
  * Permissions are enforced at route level (can: middleware).
  */
@@ -31,32 +38,70 @@ abstract class BaseCrudController extends Controller
 
     protected string $title;
 
+    protected string $permission = '';
+
     protected string $storeRequest;
 
     protected string $updateRequest;
 
-    /** Extra view data shared with create/edit forms (dropdown options etc.). */
+    /**
+     * Index table columns for the generic view.
+     * Each: ['key','label','type' => text|image|icon|badge|boolean|date|color, 'sortable' => bool]
+     */
+    protected function columns(): array
+    {
+        return [
+            ['key' => 'title', 'label' => 'Title', 'type' => 'text', 'sortable' => false],
+        ];
+    }
+
+    /**
+     * Form fields for the generic view.
+     * Each: ['name','label','type' => text|textarea|editor|media|select|number|color|icon|switch|url|email,
+     *        'options' => [], 'required' => bool, 'col' => 'col-md-6', 'help' => '', 'default' => mixed]
+     */
+    protected function fields(): array
+    {
+        return [];
+    }
+
+    /** Extra view data shared with create/edit forms. */
     protected function formData(): array
     {
         return [];
     }
 
-    public function index(Request $request): View
+    /** Common payload for every view. */
+    protected function viewData(): array
     {
-        $items = $this->service->list($request);
-
-        return view("{$this->viewPrefix}.index", [
-            'items' => $items,
+        return [
             'title' => $this->title,
             'routePrefix' => $this->routePrefix,
+            'permission' => $this->permission,
+        ];
+    }
+
+    /** Prefer a module-specific Blade view, fall back to the shared generic one. */
+    protected function resolveView(string $name, string $fallback): string
+    {
+        return view()->exists("{$this->viewPrefix}.{$name}")
+            ? "{$this->viewPrefix}.{$name}"
+            : $fallback;
+    }
+
+    public function index(Request $request): View
+    {
+        return view($this->resolveView('index', 'admin.crud.index'), $this->viewData() + [
+            'items' => $this->service->list($request),
+            'columns' => $this->columns(),
         ]);
     }
 
     public function create(): View
     {
-        return view("{$this->viewPrefix}.create", [
-            'title' => $this->title,
-            'routePrefix' => $this->routePrefix,
+        return view($this->resolveView('form', 'admin.crud.form'), $this->viewData() + [
+            'item' => null,
+            'fields' => $this->fields(),
         ] + $this->formData());
     }
 
@@ -73,10 +118,9 @@ abstract class BaseCrudController extends Controller
 
     public function edit(int $id): View
     {
-        return view("{$this->viewPrefix}.edit", [
+        return view($this->resolveView('form', 'admin.crud.form'), $this->viewData() + [
             'item' => $this->service->findOrFail($id),
-            'title' => $this->title,
-            'routePrefix' => $this->routePrefix,
+            'fields' => $this->fields(),
         ] + $this->formData());
     }
 
