@@ -5,12 +5,12 @@
 @php $headerMenu = menu_tree('header'); @endphp
 
 <header class="site-header {{ setting('header_sticky', '1') == '1' ? 'sticky-top' : '' }}" id="siteHeader">
-    <nav class="navbar navbar-expand-lg py-3">
+    <nav class="navbar navbar-expand-lg py-2">
         <div class="container">
             {{-- Logo --}}
-            <a href="{{ route('frontend.home') }}" class="navbar-brand d-flex align-items-center gap-2">
+            <a href="{{ route('frontend.home') }}" class="navbar-brand py-0 d-flex align-items-center gap-2">
                 @if(setting('site_logo'))
-                    <img src="{{ uploaded_asset(setting('site_logo')) }}" alt="{{ setting('site_name') }}" height="46">
+                    <img src="{{ uploaded_asset(setting('site_logo')) }}" alt="{{ setting('site_name') }}" height="40">
                 @else
                     <span class="brand-mark d-inline-flex align-items-center justify-content-center rounded-3">
                         <i class="bi bi-buildings"></i>

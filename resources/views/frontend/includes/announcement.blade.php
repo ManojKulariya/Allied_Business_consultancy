@@ -1,6 +1,6 @@
 {{-- Top announcement bar — fully managed in Settings → Announcement Bar --}}
 @if(setting('announcement_enabled') == '1' && setting('announcement_text'))
-    <div class="announcement-bar py-2 px-3 text-center small"
+    <div class="announcement-bar py-1 px-3 text-center"
          style="background: {{ setting('announcement_bg_color', '#0B3C5D') }}; color: {{ setting('announcement_text_color', '#FFFFFF') }};">
         <span>{{ setting('announcement_text') }}</span>
         @if(setting('announcement_button_text'))
