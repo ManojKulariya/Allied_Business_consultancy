@@ -31,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Generate URLs from APP_URL — required when served from a
+        // subdirectory (http://localhost/allied-business) behind a rewrite,
+        // where automatic base-URL detection fails.
+        \Illuminate\Support\Facades\URL::forceRootUrl(config('app.url'));
+
         // Bootstrap 5 pagination views
         Paginator::useBootstrapFive();
 

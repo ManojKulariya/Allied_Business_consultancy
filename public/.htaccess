@@ -3,6 +3,13 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # Stop mod_dir redirecting /admin to the physical admin/ asset directory
+    # before the framework rewrite below can route it (directory listings are
+    # already disabled, so this is safe).
+    <IfModule mod_dir.c>
+        DirectorySlash Off
+    </IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header
@@ -17,6 +24,11 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
+
+    # "/admin" is a Laravel route, but public/admin/ also exists as the
+    # asset directory (css/js/img) — route the bare URL to the framework
+    # while deeper asset paths keep resolving as real files.
+    RewriteRule ^admin/?$ index.php [L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
