@@ -1,4 +1,4 @@
-{{-- Sticky dynamic header: logo, menu (Menus module), CTA.
+﻿{{-- Sticky dynamic header: logo, menu (Menus module), CTA.
      The item routed to frontend.services.index renders as a full-width
      mega menu fed by services_menu() (Service Categories + Services,
      cached, auto-refreshed on any admin change). --}}
@@ -50,7 +50,7 @@
                                                     <ul class="list-unstyled mega-services mb-0">
                                                         @foreach($category->activeServices->take(4) as $service)
                                                             <li>
-                                                                <a href="{{ safe_route('frontend.services.show', $service) }}">
+                                                                <a href="{{ service_url($service) }}">
                                                                     {{ $service->title }}
                                                                 </a>
                                                             </li>
@@ -157,7 +157,7 @@
                                              data-bs-parent="#mobileServicesAccordion">
                                             <div class="accordion-body py-1 ps-4">
                                                 @foreach($category->activeServices as $service)
-                                                    <a href="{{ safe_route('frontend.services.show', $service) }}"
+                                                    <a href="{{ service_url($service) }}"
                                                        class="d-block py-1 small text-muted text-decoration-none">
                                                         {{ $service->title }}
                                                     </a>

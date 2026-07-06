@@ -5,7 +5,9 @@
       "PowerShell(composer --version)",
       "PowerShell(mysql --version 2>$null)",
       "PowerShell(composer config --global --unset cafile 2>&1; composer config --global capath \"\" 2>&1; $env:COMPOSER_CAFILE = \"\"; Set-Location \"d:\\\\xampp\\\\htdocs\"; composer create-project laravel/laravel allied-temp --prefer-dist --no-interaction 2>&1 | Select-Object -Last 15)",
-      "PowerShell(composer config --global --list 2>&1 | Select-String \"cafile|ssl|secure|tls\"; Get-Content \"$env:APPDATA\\\\Composer\\\\config.json\" 2>$null)"
+      "PowerShell(composer config --global --list 2>&1 | Select-String \"cafile|ssl|secure|tls\"; Get-Content \"$env:APPDATA\\\\Composer\\\\config.json\" 2>$null)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Add first static service page: Private Limited Company Registration *)"
     ]
   }
 }

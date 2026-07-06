@@ -12,7 +12,8 @@
 
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    {{-- "@@" escapes Blade's @context directive --}}
+    "@@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
         @foreach($crumbs as $crumb)

@@ -39,12 +39,21 @@ Route::name('frontend.')->group(function () {
         Route::get('blog/{blog:slug}', ["{$frontend}\BlogController", 'show'])->name('blogs.show');
     }
 
-    // Services (detail pages are a future phase — the mega menu already
-    // targets these route names via safe_route() and will auto-connect)
+    // Services (dynamic pages are a future phase — the mega menu targets
+    // these route names via safe_route()/service_url() and will auto-connect)
     if (class_exists("{$frontend}\ServiceController")) {
         Route::get('services', ["{$frontend}\ServiceController", 'index'])->name('services.index');
         Route::get('services/category/{serviceCategory:slug}', ["{$frontend}\ServiceController", 'category'])->name('services.category');
         Route::get('services/{service:slug}', ["{$frontend}\ServiceController", 'show'])->name('services.show');
+    } else {
+        // Static service pages (pre-CMS): serves any Blade view found in
+        // frontend/services/static/{slug} on the same URL the dynamic
+        // route will use later, so links never change.
+        Route::get('services/{slug}', function (string $slug) {
+            abort_unless(view()->exists("frontend.services.static.{$slug}"), 404);
+
+            return view("frontend.services.static.{$slug}");
+        })->where('slug', '[a-z0-9\-]+')->name('services.static');
     }
 
     // Team, gallery, testimonials, FAQs

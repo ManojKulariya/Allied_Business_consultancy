@@ -80,6 +80,26 @@ if (! function_exists('services_menu')) {
     }
 }
 
+if (! function_exists('service_url')) {
+    /**
+     * URL for a service in navigation. Priority:
+     * dynamic detail route (future phase) > static page view > '#'.
+     * Static pages live at resources/views/frontend/services/static/{slug}.blade.php
+     */
+    function service_url(\App\Models\Service $service): string
+    {
+        if (\Illuminate\Support\Facades\Route::has('frontend.services.show')) {
+            return route('frontend.services.show', $service);
+        }
+
+        if (view()->exists("frontend.services.static.{$service->slug}")) {
+            return route('frontend.services.static', $service->slug);
+        }
+
+        return '#';
+    }
+}
+
 if (! function_exists('social_links')) {
     /**
      * Get all active social links (cached).
