@@ -101,7 +101,7 @@
 <section class="section-pad" style="background: #fff;" id="benefits">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <span class="section-eyebrow mb-2">Key Benefits</span>
+            <span class="section-eyebrow mb-2">{{ $page['benefits_eyebrow'] ?? 'Key Benefits' }}</span>
             <h2 class="section-title">{{ $page['benefits_title'] }}</h2>
         </div>
 
@@ -125,7 +125,7 @@
         <div class="row g-4 g-lg-5 align-items-start">
             {{-- Eligibility --}}
             <div class="col-lg-5" data-aos="fade-right">
-                <span class="section-eyebrow mb-2">Eligibility</span>
+                <span class="section-eyebrow mb-2">{{ $page['eligibility_eyebrow'] ?? 'Eligibility' }}</span>
                 <h2 class="section-title mb-4">{{ $page['eligibility_title'] ?? 'Who Can Register?' }}</h2>
 
                 @foreach($page['eligibility'] as [$eIcon, $eTitle, $eText])
@@ -177,7 +177,7 @@
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <span class="section-eyebrow mb-2">How It Works</span>
-            <h2 class="section-title">Registration in {{ count($page['process']) }} Simple Steps</h2>
+            <h2 class="section-title">{{ $page['process_title'] ?? 'Registration in '.count($page['process']).' Simple Steps' }}</h2>
             @if(!empty($page['process_note']))
                 <p class="text-muted">{{ $page['process_note'] }}</p>
             @endif
