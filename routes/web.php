@@ -77,9 +77,13 @@ Route::name('frontend.')->group(function () {
         Route::post('careers/{career:slug}/apply', ["{$frontend}\CareerController", 'apply'])->name('careers.apply');
     }
 
-    // Dynamic CMS pages — keep LAST (catch-all slug)
+    // Dynamic CMS pages — keep LAST (catch-all slug).
+    // Excludes "admin": routes/admin.php registers via a separate then()
+    // callback in bootstrap/app.php that runs AFTER this whole file, so
+    // without this guard the single-segment catch-all here would swallow
+    // bare /admin before the real admin.dashboard route ever gets a turn.
     if (class_exists("{$frontend}\PageController")) {
         Route::get('about-us', ["{$frontend}\PageController", 'about'])->name('about');
-        Route::get('{page:slug}', ["{$frontend}\PageController", 'show'])->name('page');
+        Route::get('{page:slug}', ["{$frontend}\PageController", 'show'])->name('page')->where('page', '^(?!admin$)[^/]+$');
     }
 });
