@@ -23,6 +23,9 @@
                         <div>
                             <span class="badge {{ $contact->is_read ? 'bg-secondary' : 'bg-primary' }}">{{ $contact->is_read ? 'Read' : 'New' }}</span>
                             <span class="badge {{ $contact->isReplied() ? 'bg-success' : 'bg-warning text-dark' }}">{{ ucfirst($contact->reply_status) }}</span>
+                            @if($contact->source === 'chatbot')
+                                <span class="badge bg-info-subtle text-info-emphasis"><i class="bi bi-chat-dots"></i> Chatbot Lead</span>
+                            @endif
                         </div>
                         <span class="small text-muted">{{ $contact->created_at->format('d M Y, h:i A') }}</span>
                     </div>

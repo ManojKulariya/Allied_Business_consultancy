@@ -23,6 +23,9 @@
 
     {{-- Site CSS --}}
     <link href="{{ asset('frontend/css/frontend.css') }}" rel="stylesheet">
+    @if(setting('chat_enabled', '1'))
+        <link href="{{ asset('frontend/css/chatbot.css') }}" rel="stylesheet">
+    @endif
 
     {{-- Analytics: GA4 + Microsoft Clarity (respects enable toggle, IP ignore list, cookie consent) --}}
     @include('frontend.includes.analytics-scripts')
@@ -50,6 +53,9 @@
 <button id="backToTop" class="btn btn-primary rounded-circle shadow" aria-label="Back to top">
     <i class="bi bi-arrow-up"></i>
 </button>
+
+{{-- AI Chat Assistant --}}
+@include('frontend.includes.chatbot')
 
 {{-- Vendor JS --}}
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>

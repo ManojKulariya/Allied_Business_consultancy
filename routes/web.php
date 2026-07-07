@@ -32,6 +32,14 @@ Route::name('frontend.')->group(function () {
         Route::post('contact-us', ["{$frontend}\ContactController", 'store'])->name('contact.store');
     }
 
+    // AI Chat Assistant — rate-limited to reduce API-key abuse / spam
+    if (class_exists("{$frontend}\ChatController")) {
+        Route::middleware('throttle:15,1')->prefix('chatbot')->name('chatbot.')->group(function () use ($frontend) {
+            Route::post('message', ["{$frontend}\ChatController", 'message'])->name('message');
+            Route::post('lead', ["{$frontend}\ChatController", 'lead'])->name('lead');
+        });
+    }
+
     // Blog
     if (class_exists("{$frontend}\BlogController")) {
         Route::get('blog', ["{$frontend}\BlogController", 'index'])->name('blogs.index');

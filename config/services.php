@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    // Fallback default for the AI Chat Assistant — the admin-configured
+    // Settings value (group: ai_chat) always takes priority over this.
+    'gemini' => [
+        'key' => env('GEMINI_API_KEY'),
+    ],
+
 ];

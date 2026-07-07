@@ -127,6 +127,17 @@ class SettingSeeder extends Seeder
                 'analytics_ip_ignore' => [null, 'textarea', 'IP Addresses to Ignore (one per line)'],
                 'analytics_cookie_consent' => ['0', 'boolean', 'Require Cookie Consent Before Tracking'],
             ],
+            'ai_chat' => [
+                'chat_enabled' => ['1', 'boolean', 'Enable Chatbot'],
+                'gemini_api_key' => [null, 'password', 'Gemini API Key'],
+                'chat_bot_name' => ['Allied Assistant', 'text', 'Bot Name'],
+                'chat_bot_avatar' => [null, 'image', 'Bot Avatar'],
+                'chat_welcome_message' => ["Hi! I'm here to help with company registration, GST, tax and compliance questions. What can I help you with today?", 'textarea', 'Welcome Message'],
+                'chat_suggested_questions' => ["GST Registration\nCompany Registration\nTrademark Registration\nIncome Tax Return\nContact Us\nBook Consultation\nTalk to Expert", 'textarea', 'Suggested Questions (one per line)'],
+                'chat_lead_form_enabled' => ['1', 'boolean', 'Enable Lead Capture Form'],
+                'chat_theme_color' => ['#0B3C5D', 'color', 'Chat Theme Color'],
+                'chat_fallback_message' => ['Thank you for your question. One of our consultants can guide you personally. Please call us at +91 7300070618 or submit the contact form.', 'textarea', 'Fallback Message'],
+            ],
         ];
 
         $sortOrder = 0;

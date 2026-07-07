@@ -25,6 +25,7 @@ class SettingController extends Controller
         'mail' => ['label' => 'SMTP / Mail', 'icon' => 'bi-envelope-gear'],
         'scripts' => ['label' => 'Analytics & Scripts', 'icon' => 'bi-code-slash'],
         'analytics' => ['label' => 'Analytics Integration', 'icon' => 'bi-graph-up-arrow'],
+        'ai_chat' => ['label' => 'AI Chat Assistant', 'icon' => 'bi-chat-dots'],
     ];
 
     /**

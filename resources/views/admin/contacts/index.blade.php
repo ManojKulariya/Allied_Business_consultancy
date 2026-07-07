@@ -107,6 +107,11 @@
                             @endunless
                             <td>
                                 {{ $item->name }}
+                                @if($item->source === 'chatbot')
+                                    <span class="badge bg-info-subtle text-info-emphasis ms-1" title="Captured via the AI Chat Assistant">
+                                        <i class="bi bi-chat-dots"></i> Chatbot
+                                    </span>
+                                @endif
                                 @if($item->company_name)<div class="small text-muted fw-normal">{{ $item->company_name }}</div>@endif
                             </td>
                             <td class="small">
