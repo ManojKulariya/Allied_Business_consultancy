@@ -94,14 +94,46 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-header .navbar { transition: padding .3s ease; }
 
+/* .container is already a flex row in Bootstrap, but reinforced here so
+   logo, nav and CTA stay on one vertical center line regardless of their
+   individual heights (52px logo vs ~35px nav links vs ~40px button). */
+.site-header .navbar > .container {
+    align-items: center;
+}
+
 /* Sticky shrink: slightly tighter once scrolled — smooth, no jump */
 .site-header.scrolled { box-shadow: 0 6px 24px rgba(15, 23, 42, .08); }
-.site-header.scrolled .navbar { padding-top: .25rem; padding-bottom: .25rem; }
+.site-header.scrolled .navbar { padding-top: .15rem; padding-bottom: .15rem; }
+
+/* Kill the .navbar-brand default padding/line-height (Bootstrap adds
+   ~5px top+bottom and a 1.25rem line-height) — those are what created the
+   dead space above the logo even though py-0 was already applied. */
+.site-header .navbar-brand {
+    padding: 0;
+    line-height: 1;
+}
+
+/* display:block removes the few px of inline/baseline gap browsers add
+   under images by default — invisible until you're aligning by eye. */
+.site-header .navbar-brand img {
+    display: block;
+    width: auto;
+    transition: transform .3s ease;
+    transform-origin: left center;
+}
+
+/* Subtle logo shrink on scroll, matching the navbar's own compression */
+.site-header.scrolled .navbar-brand img {
+    transform: scale(.87);
+}
 
 .site-header .nav-link {
+    display: inline-flex;
+    align-items: center;
     color: var(--theme-heading);
     font-weight: 500;
-    padding: .35rem .8rem !important;
+    line-height: 1;
+    padding: .65rem .8rem !important;
     border-radius: 8px;
     transition: color .15s ease, background .15s ease;
 }
@@ -109,10 +141,14 @@ h1, h2, h3, h4, h5, h6 {
 .site-header .nav-link:hover,
 .site-header .nav-link.active { color: var(--theme-secondary); background: rgba(31, 111, 235, .06); }
 
-/* Header CTA: same width and styling, reduced height, centered with nav */
+/* Header CTA: same width and styling, height matched to the nav-link row
+   above so button, links and logo all share one visual baseline. */
 .site-header .btn-accent {
-    padding-top: .45rem;
-    padding-bottom: .45rem;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    padding-top: .6rem;
+    padding-bottom: .6rem;
 }
 
 .site-header .navbar-toggler { padding-block: .1rem; }
@@ -124,6 +160,14 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
     font-size: 1.15rem;
     transition: width .3s ease, height .3s ease;
+}
+
+/* Fallback (no uploaded logo) brand mark reads small next to a 52px logo
+   elsewhere on the site — scaled up to match in the header specifically. */
+.site-header .brand-mark {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
 }
 
 .brand-text { color: var(--theme-primary); }
