@@ -27,6 +27,10 @@ class ServicesArchitectureSeeder extends Seeder
             ['One Person Company Registration', false],
             ['Partnership Firm Registration', false],
             ['Sole Proprietorship Registration', false],
+            ['Startup India Registration', false],
+            ['Section 8 Company Registration', false],
+            ['Producer Company Registration', false],
+            ['Nidhi Company Registration', false],
         ]],
         'GST Services' => ['bi-receipt', [
             ['GST Registration', true],
