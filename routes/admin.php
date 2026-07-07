@@ -189,6 +189,18 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::delete('{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('destroy');
     });
 
+    /* ----------------------------- Analytics ----------------------------- */
+    if (class_exists('App\Http\Controllers\Admin\AnalyticsController')) {
+        Route::prefix('analytics')->name('analytics.')->middleware('can:analytics.view')->group(function () {
+            $controller = 'App\Http\Controllers\Admin\AnalyticsController';
+
+            Route::get('/', [$controller, 'index'])->name('index');
+            Route::get('chart-data', [$controller, 'chartData'])->name('chart-data');
+            Route::get('realtime', [$controller, 'realtime'])->name('realtime');
+            Route::get('behavior', [$controller, 'behavior'])->name('behavior');
+        });
+    }
+
     /* ----------------------------- Settings ----------------------------- */
     // Site / contact / header / footer / theme / seo / mail / scripts + SEO defaults
     Route::middleware('can:settings.edit')->group(function () {

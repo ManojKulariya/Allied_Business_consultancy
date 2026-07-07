@@ -118,6 +118,15 @@ class SettingSeeder extends Seeder
                 'body_scripts' => [null, 'textarea', 'Extra <body> End Scripts'],
                 'custom_css' => [null, 'textarea', 'Custom CSS'],
             ],
+            'analytics' => [
+                'analytics_enabled' => ['1', 'boolean', 'Enable Tracking'],
+                'ga4_measurement_id' => [null, 'text', 'GA4 Measurement ID (G-XXXXXXXXXX)'],
+                'ga4_property_id' => [null, 'text', 'GA4 Property ID (numeric, e.g. 123456789)'],
+                'ga4_service_account_json' => [null, 'textarea', 'Google Service Account JSON (paste full file contents)'],
+                'clarity_project_id' => [null, 'text', 'Microsoft Clarity Project ID'],
+                'analytics_ip_ignore' => [null, 'textarea', 'IP Addresses to Ignore (one per line)'],
+                'analytics_cookie_consent' => ['0', 'boolean', 'Require Cookie Consent Before Tracking'],
+            ],
         ];
 
         $sortOrder = 0;

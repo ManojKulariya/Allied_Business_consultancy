@@ -24,6 +24,7 @@ class SettingController extends Controller
         'seo' => ['label' => 'SEO Defaults', 'icon' => 'bi-search'],
         'mail' => ['label' => 'SMTP / Mail', 'icon' => 'bi-envelope-gear'],
         'scripts' => ['label' => 'Analytics & Scripts', 'icon' => 'bi-code-slash'],
+        'analytics' => ['label' => 'Analytics Integration', 'icon' => 'bi-graph-up-arrow'],
     ];
 
     /**

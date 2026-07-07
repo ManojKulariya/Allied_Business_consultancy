@@ -36,6 +36,7 @@ class RolePermissionSeeder extends Seeder
         'newsletters' => ['view', 'delete'],
         'users' => ['view', 'create', 'edit', 'delete'],
         'settings' => ['edit'],
+        'analytics' => ['view'],
         'activity-logs' => ['view'],
         'roles' => ['manage'],
     ];
@@ -70,6 +71,7 @@ class RolePermissionSeeder extends Seeder
                     ->orWhere('name', 'like', '%.edit'))
                 ->where('name', 'not like', 'users.%')
                 ->where('name', 'not like', 'settings.%')
+                ->where('name', 'not like', 'analytics.%')
                 ->where('name', 'not like', 'roles.%')
                 ->where('name', 'not like', 'activity-logs.%')
                 ->get()

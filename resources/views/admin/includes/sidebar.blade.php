@@ -18,6 +18,20 @@
                 </a>
             </li>
 
+            @can('analytics.view')
+                <li class="nav-item">
+                    <a href="#collapseAnalytics" data-bs-toggle="collapse" class="nav-link {{ active_menu('admin.analytics.*', '') ?: 'collapsed' }}">
+                        <i class="bi bi-graph-up-arrow"></i> <span>Analytics</span> <i class="bi bi-chevron-down ms-auto small"></i>
+                    </a>
+                    <div class="collapse {{ active_menu('admin.analytics.*', 'show') }}" id="collapseAnalytics">
+                        <ul class="nav flex-column sidebar-submenu">
+                            <li><a href="{{ safe_route('admin.analytics.index') }}" class="nav-link">Dashboard</a></li>
+                            <li><a href="{{ safe_route('admin.analytics.behavior') }}" class="nav-link">Behavior Analytics</a></li>
+                        </ul>
+                    </div>
+                </li>
+            @endcan
+
             @can('home-sections.edit')
                 <li class="nav-item">
                     <a href="{{ safe_route('admin.home-sections.index') }}" class="nav-link {{ active_menu('admin.home-sections.*') }}">

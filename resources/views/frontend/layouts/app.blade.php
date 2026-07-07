@@ -24,16 +24,9 @@
     {{-- Site CSS --}}
     <link href="{{ asset('frontend/css/frontend.css') }}" rel="stylesheet">
 
-    {{-- Analytics --}}
-    @if(setting('google_analytics_id'))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('google_analytics_id') }}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', @json(setting('google_analytics_id')));
-        </script>
-    @endif
+    {{-- Analytics: GA4 + Microsoft Clarity (respects enable toggle, IP ignore list, cookie consent) --}}
+    @include('frontend.includes.analytics-scripts')
+
     @if(setting('head_scripts')){!! setting('head_scripts') !!}@endif
 
     @stack('styles')
