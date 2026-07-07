@@ -38,7 +38,7 @@
                 <p class="lead mb-4">{{ $page['intro'] }}</p>
 
                 <div class="d-flex flex-wrap gap-3 mb-4">
-                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('contact_phone', '+910000000000')) }}" class="btn btn-accent btn-lg px-4">
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('contact_phone', '+917300070618')) }}" class="btn btn-accent btn-lg px-4">
                         <i class="bi bi-headset me-2"></i>Talk to an Expert
                     </a>
                     <a href="{{ url('/contact-us') }}" class="btn btn-outline-light btn-lg px-4">

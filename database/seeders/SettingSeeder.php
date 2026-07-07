@@ -13,17 +13,23 @@ class SettingSeeder extends Seeder
             // group => [key => [value, type, label]]
             'site' => [
                 'site_name' => ['Allied Business Consultancy', 'text', 'Site Name'],
-                'site_tagline' => ['Your Trusted Business Partner', 'text', 'Tagline'],
+                'site_tagline' => ['Helping Entrepreneurs Start, Manage, Protect & Grow Their Businesses', 'text', 'Tagline'],
                 'site_logo' => [null, 'image', 'Logo'],
                 'site_logo_light' => [null, 'image', 'Logo (Light)'],
                 'site_favicon' => [null, 'image', 'Favicon'],
                 'maintenance_message' => ['We are performing scheduled maintenance. We will be back online shortly!', 'textarea', 'Maintenance Message'],
             ],
             'contact' => [
-                'contact_email' => ['info@alliedbusiness.com', 'text', 'Contact Email'],
-                'contact_phone' => ['+91 00000 00000', 'text', 'Contact Phone'],
-                'contact_address' => ['123 Business Avenue, Corporate District', 'textarea', 'Address'],
-                'contact_map_embed' => [null, 'textarea', 'Google Map Embed Code'],
+                'contact_email' => ['alliedbusinessconsultancy@gmail.com', 'text', 'Contact Email'],
+                'contact_phone' => ['+91 7300070618', 'text', 'Contact Phone'],
+                'contact_address' => ["M-02, Mezzanine Floor, Shree Amar Heights,\nDCM, Ajmer Road, Nirman Nagar,\nJaipur \u{2013} 302019", 'textarea', 'Address'],
+                'contact_map_embed' => [
+                    '<iframe src="https://maps.google.com/maps?q='
+                        .'M-02%2C%20Shree%20Amar%20Heights%2C%20DCM%2C%20Ajmer%20Road%2C%20Nirman%20Nagar%2C%20Jaipur%20-%20302019'
+                        .'&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>',
+                    'textarea',
+                    'Google Map Embed Code',
+                ],
                 'working_hours' => ['Mon - Sat: 9:00 AM - 6:00 PM', 'text', 'Working Hours'],
             ],
             'header' => [
@@ -34,15 +40,15 @@ class SettingSeeder extends Seeder
                 'header_sticky' => ['1', 'boolean', 'Sticky Header'],
             ],
             'footer' => [
-                'footer_about' => ['Allied Business Consultancy provides expert business solutions to help your company grow and succeed in today\'s competitive market.', 'textarea', 'Footer About Text'],
+                'footer_about' => ['Allied Business Consultancy helps entrepreneurs easily start, manage, protect and grow their businesses — a single point of contact for company registration, taxation, GST and compliance, with transparent pricing and complete confidentiality.', 'textarea', 'Footer About Text'],
                 'footer_copyright' => ['© {year} Allied Business Consultancy. All Rights Reserved.', 'text', 'Copyright Text'],
                 'footer_newsletter_title' => ['Subscribe to Our Newsletter', 'text', 'Newsletter Title'],
                 'footer_newsletter_text' => ['Get the latest updates and insights delivered to your inbox.', 'textarea', 'Newsletter Text'],
             ],
             'seo' => [
-                'meta_title' => ['Allied Business Consultancy — Your Trusted Business Partner', 'text', 'Default Meta Title'],
-                'meta_description' => ['Professional business consultancy services: strategy, finance, HR, marketing and more.', 'textarea', 'Default Meta Description'],
-                'meta_keywords' => ['business consultancy, corporate advisory, business strategy', 'textarea', 'Default Meta Keywords'],
+                'meta_title' => ['Allied Business Consultancy — Company Registration, GST & Tax Experts in Jaipur', 'text', 'Default Meta Title'],
+                'meta_description' => ['Allied Business Consultancy helps entrepreneurs start, manage, protect and grow their businesses — company registration, GST, income tax, accounting and compliance services in Jaipur, Rajasthan.', 'textarea', 'Default Meta Description'],
+                'meta_keywords' => ['business consultancy Jaipur, company registration Rajasthan, GST registration, income tax filing, chartered accountant Jaipur, business compliance', 'textarea', 'Default Meta Keywords'],
                 'og_image' => [null, 'image', 'Default Share Image'],
             ],
             'announcement' => [
@@ -90,9 +96,9 @@ class SettingSeeder extends Seeder
                 'mail_encryption' => ['tls', 'select', 'Encryption', [
                     'tls' => 'TLS', 'ssl' => 'SSL', '' => 'None',
                 ]],
-                'mail_from_address' => ['noreply@alliedbusiness.com', 'text', 'From Email'],
+                'mail_from_address' => ['alliedbusinessconsultancy@gmail.com', 'text', 'From Email'],
                 'mail_from_name' => ['Allied Business Consultancy', 'text', 'From Name'],
-                'mail_notification_recipients' => ['admin@alliedbusiness.com', 'text', 'Notification Recipients (comma separated)'],
+                'mail_notification_recipients' => ['alliedbusinessconsultancy@gmail.com', 'text', 'Notification Recipients (comma separated)'],
             ],
             'scripts' => [
                 'google_analytics_id' => [null, 'text', 'Google Analytics ID (G-XXXX)'],

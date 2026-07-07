@@ -10,7 +10,7 @@ class SeoSettingSeeder extends Seeder
     public function run(): void
     {
         $pages = [
-            ['route_name' => 'frontend.home', 'page_label' => 'Home', 'meta_title' => 'Allied Business Consultancy — Your Trusted Business Partner'],
+            ['route_name' => 'frontend.home', 'page_label' => 'Home', 'meta_title' => 'Allied Business Consultancy — Company Registration, GST & Tax Experts in Jaipur'],
             ['route_name' => 'frontend.about', 'page_label' => 'About Us', 'meta_title' => 'About Us — Allied Business Consultancy'],
             ['route_name' => 'frontend.services.index', 'page_label' => 'Services', 'meta_title' => 'Our Services — Allied Business Consultancy'],
             ['route_name' => 'frontend.blogs.index', 'page_label' => 'Blog', 'meta_title' => 'Blog & Insights — Allied Business Consultancy'],
