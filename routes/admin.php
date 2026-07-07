@@ -108,9 +108,8 @@ Route::middleware(['auth', 'active'])->group(function () {
     }
 
     /* ------------------------- Inbox-style modules ------------------------- */
-    // Contacts, job applications, newsletters — read/manage only (created from frontend)
+    // Job applications, newsletters — read/manage only (created from frontend)
     foreach ([
-        'contacts' => ['App\Http\Controllers\Admin\ContactController', 'contacts'],
         'job-applications' => ['App\Http\Controllers\Admin\JobApplicationController', 'careers'],
         'newsletters' => ['App\Http\Controllers\Admin\NewsletterController', 'newsletters'],
     ] as $prefix => [$controller, $permission]) {
@@ -123,6 +122,31 @@ Route::middleware(['auth', 'active'])->group(function () {
             Route::get('{id}', [$controller, 'show'])->whereNumber('id')->name('show');
             Route::delete('{id}', [$controller, 'destroy'])->whereNumber('id')->name('destroy');
             Route::post('bulk-delete', [$controller, 'bulkDelete'])->name('bulk-delete');
+        });
+    }
+
+    /* --------------------- Contacts (lead management) --------------------- */
+    if (class_exists('App\Http\Controllers\Admin\ContactController')) {
+        Route::prefix('contacts')->name('contacts.')->middleware('can:contacts.view')->group(function () {
+            $controller = 'App\Http\Controllers\Admin\ContactController';
+
+            Route::get('/', [$controller, 'index'])->name('index');
+            Route::get('export/csv', [$controller, 'exportCsv'])->name('export-csv');
+            Route::get('export/excel', [$controller, 'exportExcel'])->name('export-excel');
+            Route::get('{id}', [$controller, 'show'])->whereNumber('id')->name('show');
+
+            Route::middleware('can:contacts.edit')->group(function () use ($controller) {
+                Route::patch('{id}/mark-read', [$controller, 'markRead'])->whereNumber('id')->name('mark-read');
+                Route::patch('{id}/mark-unread', [$controller, 'markUnread'])->whereNumber('id')->name('mark-unread');
+                Route::patch('{id}/reply-status', [$controller, 'updateReplyStatus'])->whereNumber('id')->name('reply-status');
+            });
+
+            Route::middleware('can:contacts.delete')->group(function () use ($controller) {
+                Route::delete('{id}', [$controller, 'destroy'])->whereNumber('id')->name('destroy');
+                Route::post('bulk-delete', [$controller, 'bulkDelete'])->name('bulk-delete');
+                Route::post('{id}/restore', [$controller, 'restore'])->whereNumber('id')->name('restore');
+                Route::delete('{id}/force-delete', [$controller, 'forceDelete'])->whereNumber('id')->name('force-delete');
+            });
         });
     }
 

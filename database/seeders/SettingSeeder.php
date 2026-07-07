@@ -32,6 +32,16 @@ class SettingSeeder extends Seeder
                 ],
                 'working_hours' => ['Mon - Sat: 9:00 AM - 6:00 PM', 'text', 'Working Hours'],
             ],
+            'contact_page' => [
+                'contact_hero_heading' => ["Let's Start Your Business Journey Together", 'text', 'Hero Heading'],
+                'contact_hero_description' => ['Have a question about company registration, GST or compliance? Reach out — our advisors reply within one business day.', 'textarea', 'Hero Description'],
+                'contact_hero_cta_text' => ['Call Now', 'text', 'Hero CTA Button Text'],
+                'contact_hero_cta_link' => ['tel:+917300070618', 'text', 'Hero CTA Button Link'],
+                'contact_cta_heading' => ['Need Expert Business Advice?', 'text', 'Consultation CTA Heading'],
+                'contact_cta_description' => ['Talk to our experts today and get the right guidance for your business.', 'textarea', 'Consultation CTA Description'],
+                'contact_cta_button_text' => ['Get Free Consultation', 'text', 'Consultation CTA Button Text'],
+                'contact_cta_button_link' => ['/contact-us', 'text', 'Consultation CTA Button Link'],
+            ],
             'header' => [
                 'header_show_topbar' => ['1', 'boolean', 'Show Top Bar'],
                 'header_topbar_text' => ['Welcome to Allied Business Consultancy', 'text', 'Top Bar Text'],

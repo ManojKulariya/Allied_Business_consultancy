@@ -16,6 +16,7 @@ class SettingController extends Controller
     public const GROUPS = [
         'site' => ['label' => 'Company & Site', 'icon' => 'bi-buildings'],
         'contact' => ['label' => 'Contact Info', 'icon' => 'bi-telephone'],
+        'contact_page' => ['label' => 'Contact Page', 'icon' => 'bi-envelope-paper'],
         'announcement' => ['label' => 'Announcement Bar', 'icon' => 'bi-megaphone'],
         'header' => ['label' => 'Header', 'icon' => 'bi-window'],
         'footer' => ['label' => 'Footer', 'icon' => 'bi-layout-text-window-reverse'],

@@ -32,7 +32,7 @@ class RolePermissionSeeder extends Seeder
         'process-steps' => ['view', 'create', 'edit', 'delete'],
         'why-choose-items' => ['view', 'create', 'edit', 'delete'],
         'counters' => ['view', 'create', 'edit', 'delete'],
-        'contacts' => ['view', 'delete'],
+        'contacts' => ['view', 'edit', 'delete'],
         'newsletters' => ['view', 'delete'],
         'users' => ['view', 'create', 'edit', 'delete'],
         'settings' => ['edit'],

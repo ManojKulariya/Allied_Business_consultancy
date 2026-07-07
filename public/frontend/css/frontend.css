@@ -393,6 +393,25 @@ h1, h2, h3, h4, h5, h6 {
     border-color: transparent;
 }
 
+/* ---------- Premium form (Contact page) ---------- */
+.premium-form .form-control,
+.premium-form .form-select {
+    border-color: var(--theme-border);
+    border-radius: var(--theme-radius, .5rem);
+    padding: .65rem .9rem;
+}
+
+.premium-form .form-control:focus,
+.premium-form .form-select:focus {
+    border-color: var(--theme-secondary);
+    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--theme-secondary) 15%, transparent);
+}
+
+.premium-form .form-check-input:checked {
+    background-color: var(--theme-secondary);
+    border-color: var(--theme-secondary);
+}
+
 .icon-badge {
     width: 62px;
     height: 62px;

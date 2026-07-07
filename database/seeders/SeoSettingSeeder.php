@@ -19,7 +19,13 @@ class SeoSettingSeeder extends Seeder
             ['route_name' => 'frontend.testimonials.index', 'page_label' => 'Testimonials', 'meta_title' => 'Client Testimonials — Allied Business Consultancy'],
             ['route_name' => 'frontend.faqs.index', 'page_label' => 'FAQs', 'meta_title' => 'Frequently Asked Questions — Allied Business Consultancy'],
             ['route_name' => 'frontend.careers.index', 'page_label' => 'Careers', 'meta_title' => 'Careers — Join Allied Business Consultancy'],
-            ['route_name' => 'frontend.contact', 'page_label' => 'Contact Us', 'meta_title' => 'Contact Us — Allied Business Consultancy'],
+            [
+                'route_name' => 'frontend.contact',
+                'page_label' => 'Contact Us',
+                'meta_title' => 'Contact Us — Allied Business Consultancy | Jaipur',
+                'meta_description' => 'Get in touch with Allied Business Consultancy for company registration, GST, income tax and compliance guidance. Call, email or visit our Jaipur office — we reply within one business day.',
+                'meta_keywords' => 'contact allied business consultancy, business consultant Jaipur contact, GST registration enquiry, company registration contact Jaipur',
+            ],
         ];
 
         foreach ($pages as $page) {

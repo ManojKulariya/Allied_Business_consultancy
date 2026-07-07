@@ -35,4 +35,14 @@ class Contact extends Model
 
         return $this->forceFill(['is_read' => true, 'read_at' => now()])->save();
     }
+
+    public function markAsUnread(): bool
+    {
+        return $this->forceFill(['is_read' => false, 'read_at' => null])->save();
+    }
+
+    public function isReplied(): bool
+    {
+        return $this->reply_status === 'replied';
+    }
 }

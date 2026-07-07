@@ -229,6 +229,15 @@ class DemoContentSeeder extends Seeder
             ['Can you take over from my current accountant?', 'Yes. We handle the entire transition including records handover, pending filings and system migration, typically within two weeks.', 'Services'],
             ['Do you work with startups?', 'Absolutely — from incorporation and compliance calendars to investor-ready financials, our startup desk supports you at every stage.', 'Services'],
             ['How quickly do you respond to queries?', 'Every client has a dedicated account manager. Standard queries are answered within one business day; urgent compliance matters the same day.', 'Support'],
+            ['How long does company registration take in India?', 'A Private Limited Company or OPC is typically incorporated in 7–10 working days once documents and DSC are in place, subject to MCA processing times.', 'Business Registration'],
+            ['Which business structure should I choose — Private Limited, LLP, or OPC?', 'It depends on your funding plans, liability comfort and compliance appetite. We assess your goals on the discovery call and recommend the structure that fits best.', 'Business Registration'],
+            ['Do I need GST registration for my business?', 'GST registration is mandatory once turnover crosses the prescribed threshold, or if you sell inter-state or on e-commerce platforms — we can confirm applicability for your case.', 'GST'],
+            ['What is the penalty for late GST return filing?', 'Late GST filing attracts late fees plus interest on the outstanding tax. We track your filing calendar so returns are never missed.', 'GST'],
+            ['When is the due date for income tax return filing?', 'For most businesses without audit requirements, the due date is 31st July; audited entities generally have until 31st October — we confirm the exact date for your case each year.', 'Income Tax'],
+            ['Can you help with tax planning to reduce my liability?', 'Yes. We review your income structure, eligible deductions and investment options well before year-end to legally minimise your tax outgo.', 'Income Tax'],
+            ['How long does trademark registration take?', 'A trademark application is usually filed within a few days; full registration (if unopposed) typically takes 8–18 months as per Trademark Registry timelines.', 'Trademark'],
+            ['Do you offer monthly bookkeeping services for small businesses?', 'Yes — we handle day-to-day bookkeeping, bank reconciliation and MIS reporting on a monthly basis so your books stay audit-ready year-round.', 'Accounting'],
+            ['What compliances does a Private Limited Company need to follow every year?', 'Annual ROC filings (AOC-4, MGT-7), statutory audit, income tax return, board meetings and GST/TDS returns as applicable — we manage the full compliance calendar for you.', 'Compliance'],
         ] as $i => [$question, $answer, $category]) {
             Faq::query()->create([
                 'question' => $question,
