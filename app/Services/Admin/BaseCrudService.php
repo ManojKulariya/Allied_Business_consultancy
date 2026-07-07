@@ -169,6 +169,15 @@ abstract class BaseCrudService
     }
 
     /**
+     * Bulk set active/inactive status by ids. Returns number of affected rows.
+     */
+    public function bulkSetStatus(array $ids, bool $active): int
+    {
+        return $this->model::query()->whereKey($ids)
+            ->update(['status' => $active ? \App\Enums\Status::Active : \App\Enums\Status::Inactive]);
+    }
+
+    /**
      * Upload configured file fields and clean up replaced files.
      * Media-picker fields submit library paths (strings) and pass straight
      * through — only raw file inputs need processing here.

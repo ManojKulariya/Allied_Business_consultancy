@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             HomeSectionSeeder::class,
             ServicesArchitectureSeeder::class,
             DemoContentSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

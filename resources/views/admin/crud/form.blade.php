@@ -1,6 +1,6 @@
 ﻿{{-- Generic module form (create + edit) driven by the controller's fields() config.
      Field types: text, textarea, editor, media, select, number, color,
-     icon, switch, url, email, json --}}
+     icon, switch, url, email, date, datetime-local, time --}}
 @extends('admin.layouts.app')
 
 @php $editing = $item !== null; @endphp
@@ -30,6 +30,12 @@
                             $dotName = str_replace(['[', ']'], ['.', ''], $name);
                             $label = $field['label'] ?? Str::headline($dotName);
                             $value = old($dotName, $editing ? data_get($item, $dotName) : ($field['default'] ?? ''));
+                            // Cast-backed enums (e.g. the 'status' column via HasStatus)
+                            // aren't Stringable — unwrap to the raw scalar so every field
+                            // type below can safely compare/echo the value.
+                            if ($value instanceof \BackedEnum) {
+                                $value = $value->value;
+                            }
                             $required = $field['required'] ?? false;
                             $col = $field['col'] ?? 'col-md-6';
                         @endphp
@@ -114,8 +120,23 @@
                                     @break
 
                                 @default
+                                    @php
+                                        // Native input types that need no special handling beyond
+                                        // passing the type through and formatting Carbon values.
+                                        $nativeTypes = ['url', 'email', 'date', 'datetime-local', 'time', 'tel'];
+                                        $inputType = in_array($field['type'] ?? 'text', $nativeTypes) ? $field['type'] : 'text';
+
+                                        if ($value instanceof \Illuminate\Support\Carbon) {
+                                            $value = match ($inputType) {
+                                                'date' => $value->format('Y-m-d'),
+                                                'datetime-local' => $value->format('Y-m-d\TH:i'),
+                                                'time' => $value->format('H:i'),
+                                                default => (string) $value,
+                                            };
+                                        }
+                                    @endphp
                                     <label class="form-label">{{ $label }} @if($required)<span class="text-danger">*</span>@endif</label>
-                                    <input type="{{ in_array($field['type'] ?? 'text', ['url', 'email']) ? $field['type'] : 'text' }}"
+                                    <input type="{{ $inputType }}"
                                            name="{{ $name }}"
                                            class="form-control @error($dotName) is-invalid @enderror"
                                            value="{{ $value }}" @required($required)

@@ -85,6 +85,8 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::prefix($prefix)->name("{$prefix}.")->group(function () use ($controller, $permission) {
             Route::post('bulk-delete', [$controller, 'bulkDelete'])
                 ->middleware("can:{$permission}.delete")->name('bulk-delete');
+            Route::post('bulk-status', [$controller, 'bulkSetStatus'])
+                ->middleware("can:{$permission}.edit")->name('bulk-status');
             Route::patch('{id}/toggle-status', [$controller, 'toggleStatus'])
                 ->middleware("can:{$permission}.edit")->name('toggle-status');
             Route::post('{id}/restore', [$controller, 'restore'])

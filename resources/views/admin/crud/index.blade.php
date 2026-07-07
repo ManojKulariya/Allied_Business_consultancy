@@ -60,6 +60,18 @@
                     @endif
                 </div>
                 <div class="col text-end">
+                    @can("{$permission}.edit")
+                        @unless($onTrash)
+                            <button type="button" class="bulk-status-btn btn btn-sm btn-outline-success d-none"
+                                    data-url="{{ route("{$routePrefix}.bulk-status") }}" data-active="1">
+                                <i class="bi bi-check-circle me-1"></i> Activate (<span class="count">0</span>)
+                            </button>
+                            <button type="button" class="bulk-status-btn btn btn-sm btn-outline-secondary d-none"
+                                    data-url="{{ route("{$routePrefix}.bulk-status") }}" data-active="0">
+                                <i class="bi bi-dash-circle me-1"></i> Deactivate (<span class="count">0</span>)
+                            </button>
+                        @endunless
+                    @endcan
                     @can("{$permission}.delete")
                         @unless($onTrash)
                             <button type="button" id="bulk-delete-btn"

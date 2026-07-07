@@ -100,4 +100,43 @@
 
         counters.forEach((el) => observer.observe(el));
     }
+
+    /* ---------- Blog: table of contents (built from post H2/H3s) ---------- */
+    const postContent = document.querySelector('#postContent');
+    const tocCard = document.querySelector('#tocCard');
+    const tocList = document.querySelector('#tocList');
+
+    if (postContent && tocCard && tocList) {
+        const headings = postContent.querySelectorAll('h2, h3');
+
+        if (headings.length >= 3) {
+            headings.forEach(function (heading, index) {
+                if (!heading.id) heading.id = 'toc-' + index + '-' + heading.textContent.trim()
+                    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 50);
+
+                const li = document.createElement('li');
+                if (heading.tagName === 'H3') li.className = 'toc-h3';
+
+                const a = document.createElement('a');
+                a.href = '#' + heading.id;
+                a.textContent = heading.textContent;
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+
+            tocCard.classList.remove('d-none');
+        }
+    }
+
+    /* ---------- Blog: copy link share button ---------- */
+    $(document).on('click', '#copyLinkBtn', function () {
+        const url = $(this).data('url');
+        const $btn = $(this);
+
+        navigator.clipboard.writeText(url).then(function () {
+            const original = $btn.html();
+            $btn.html('<i class="bi bi-check-lg"></i>');
+            setTimeout(() => $btn.html(original), 1500);
+        });
+    });
 })(jQuery);

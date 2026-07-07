@@ -104,16 +104,16 @@
         });
     });
 
-    /* ---------- Bulk select & delete ----------
+    /* ---------- Bulk select & delete / status ----------
        Usage: #select-all checkbox, .row-checkbox per row,
-              #bulk-delete-btn with data-url */
+              #bulk-delete-btn / .bulk-status-btn with data-url */
     $(document).on('change', '#select-all', function () {
         $('.row-checkbox').prop('checked', this.checked).trigger('change');
     });
 
     $(document).on('change', '.row-checkbox', function () {
         const count = $('.row-checkbox:checked').length;
-        $('#bulk-delete-btn').toggleClass('d-none', count === 0)
+        $('#bulk-delete-btn, .bulk-status-btn').toggleClass('d-none', count === 0)
             .find('.count').text(count);
     });
 
@@ -139,6 +139,24 @@
                 .done(() => window.location.reload())
                 .fail(() => Swal.fire('Error', 'Bulk delete failed.', 'error'));
         });
+    });
+
+    $(document).on('click', '.bulk-status-btn', function () {
+        const $btn = $(this);
+        const active = $btn.data('active');
+        const ids = $('.row-checkbox:checked').map(function () {
+            return this.value;
+        }).get();
+
+        if (!ids.length) return;
+
+        $.post($btn.data('url'), { ids: ids, active: active })
+            .done((res) => {
+                Swal.mixin({ toast: true, position: 'top-end', showConfirmButton: false, timer: 2000 })
+                    .fire({ icon: 'success', title: res.message });
+                window.location.reload();
+            })
+            .fail(() => Swal.fire('Error', 'Bulk status update failed.', 'error'));
     });
 
     /* ---------- CKEditor ----------

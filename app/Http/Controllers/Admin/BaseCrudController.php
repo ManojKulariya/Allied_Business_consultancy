@@ -181,4 +181,19 @@ abstract class BaseCrudController extends Controller
             'message' => "{$count} record(s) moved to trash.",
         ]);
     }
+
+    public function bulkSetStatus(Request $request): JsonResponse
+    {
+        $ids = array_filter((array) $request->input('ids', []), 'is_numeric');
+        $active = (bool) $request->boolean('active');
+
+        abort_if(empty($ids), 422, 'No records selected.');
+
+        $count = $this->service->bulkSetStatus($ids, $active);
+
+        return response()->json([
+            'success' => true,
+            'message' => "{$count} record(s) marked ".($active ? 'active' : 'inactive').'.',
+        ]);
+    }
 }
