@@ -1,8 +1,8 @@
-{{-- Premium footer — every block driven by Settings, Menus, Services and Social Links --}}
+{{-- Premium footer — every block driven by Settings, Menus, Service Categories, Pages and Social Links --}}
 <footer class="site-footer pt-5">
     <div class="container">
         <div class="row g-4 pb-4">
-            {{-- About --}}
+            {{-- Column 1: Company Information --}}
             <div class="col-lg-4 col-md-6">
                 <a href="{{ route('frontend.home') }}" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3">
                     @if(setting('site_logo_light') || setting('site_logo'))
@@ -17,19 +17,37 @@
                 </a>
                 <p class="footer-text small">{{ setting('footer_about') }}</p>
 
-                {{-- Social links --}}
-                <div class="d-flex gap-2 mt-3">
-                    @foreach(social_links() as $social)
-                        <a href="{{ $social->url }}" target="_blank" rel="noopener nofollow"
-                           class="social-btn d-inline-flex align-items-center justify-content-center rounded-circle"
-                           aria-label="{{ ucfirst($social->platform) }}">
-                            <i class="bi {{ $social->icon ?: 'bi-globe' }}"></i>
-                        </a>
-                    @endforeach
-                </div>
+                <ul class="list-unstyled footer-links small mb-0">
+                    @if(setting('contact_address'))
+                        <li class="d-flex gap-2 mb-2"><i class="bi bi-geo-alt"></i> <span style="white-space: pre-line;">{{ setting('contact_address') }}</span></li>
+                    @endif
+                    @if(setting('contact_phone'))
+                        <li class="d-flex gap-2 mb-2"><i class="bi bi-telephone"></i>
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('contact_phone')) }}">{{ setting('contact_phone') }}</a>
+                        </li>
+                    @endif
+                    @if(setting('contact_email'))
+                        <li class="d-flex gap-2"><i class="bi bi-envelope"></i>
+                            <a href="mailto:{{ setting('contact_email') }}">{{ setting('contact_email') }}</a>
+                        </li>
+                    @endif
+                </ul>
+
+                {{-- Social links — only rendered when at least one is configured --}}
+                @if(social_links()->isNotEmpty())
+                    <div class="d-flex gap-2 mt-3">
+                        @foreach(social_links() as $social)
+                            <a href="{{ $social->url }}" target="_blank" rel="noopener nofollow"
+                               class="social-btn d-inline-flex align-items-center justify-content-center rounded-circle"
+                               aria-label="{{ ucfirst($social->platform) }}">
+                                <i class="bi {{ $social->icon ?: 'bi-globe' }}"></i>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
-            {{-- Quick links (Menus module, location: footer) --}}
+            {{-- Column 2: Quick Links (Menus module, location: footer) --}}
             <div class="col-lg-2 col-md-6">
                 <h6 class="footer-heading">Quick Links</h6>
                 <ul class="list-unstyled footer-links">
@@ -39,55 +57,45 @@
                 </ul>
             </div>
 
-            {{-- Services --}}
+            {{-- Column 3: Popular Services (curated category subset) --}}
             <div class="col-lg-3 col-md-6">
-                <h6 class="footer-heading">Our Services</h6>
+                <h6 class="footer-heading">Popular Services</h6>
                 <ul class="list-unstyled footer-links">
-                    @foreach(\App\Models\Service::query()->active()->ordered()->limit(6)->get(['id', 'title', 'slug']) as $footerService)
+                    @php
+                        $popularSlugs = [
+                            'business-registration', 'gst-services', 'income-tax-services',
+                            'trademark-legal-services', 'accounting-bookkeeping', 'roc-mca-compliance',
+                        ];
+                        $popularCategories = \App\Models\ServiceCategory::query()->active()
+                            ->whereIn('slug', $popularSlugs)->get()->sortBy(fn ($c) => array_search($c->slug, $popularSlugs));
+                    @endphp
+                    @foreach($popularCategories as $category)
                         <li>
-                            <a href="{{ safe_route('frontend.services.show', $footerService) }}">
-                                <i class="bi bi-chevron-right small me-1"></i>{{ $footerService->title }}
+                            <a href="{{ safe_route('frontend.services.category', $category) }}">
+                                <i class="bi bi-chevron-right small me-1"></i>{{ $category->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                    <li class="mt-2">
+                        <a href="{{ safe_route('frontend.services.index') }}" class="fw-semibold">
+                            <i class="bi bi-arrow-right-circle small me-1"></i>View All Services
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Column 4: Legal (Pages module, show_in_footer) --}}
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-heading">Legal</h6>
+                <ul class="list-unstyled footer-links">
+                    @foreach(\App\Models\Page::query()->active()->where('show_in_footer', true)->ordered()->get(['id', 'title', 'slug']) as $legalPage)
+                        <li>
+                            <a href="{{ safe_route('frontend.page', $legalPage) }}">
+                                <i class="bi bi-chevron-right small me-1"></i>{{ $legalPage->title }}
                             </a>
                         </li>
                     @endforeach
                 </ul>
-            </div>
-
-            {{-- Contact + newsletter --}}
-            <div class="col-lg-3 col-md-6">
-                <h6 class="footer-heading">Get In Touch</h6>
-                <ul class="list-unstyled footer-links small">
-                    @if(setting('contact_address'))
-                        <li class="d-flex gap-2 mb-2"><i class="bi bi-geo-alt"></i> {{ setting('contact_address') }}</li>
-                    @endif
-                    @if(setting('contact_phone'))
-                        <li class="d-flex gap-2 mb-2"><i class="bi bi-telephone"></i>
-                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('contact_phone')) }}">{{ setting('contact_phone') }}</a>
-                        </li>
-                    @endif
-                    @if(setting('contact_email'))
-                        <li class="d-flex gap-2 mb-2"><i class="bi bi-envelope"></i>
-                            <a href="mailto:{{ setting('contact_email') }}">{{ setting('contact_email') }}</a>
-                        </li>
-                    @endif
-                    @if(setting('working_hours'))
-                        <li class="d-flex gap-2"><i class="bi bi-clock"></i> {{ setting('working_hours') }}</li>
-                    @endif
-                </ul>
-
-                {{-- Newsletter mini form --}}
-                <form method="POST" action="{{ safe_route('frontend.newsletter.subscribe') }}" class="newsletter-form mt-3">
-                    @csrf
-                    <div class="input-group input-group-sm">
-                        <input type="email" name="email" class="form-control" placeholder="Your email address" required>
-                        <button class="btn btn-accent" type="submit" aria-label="Subscribe">
-                            <i class="bi bi-send"></i>
-                        </button>
-                    </div>
-                    @error('email')
-                        <div class="text-warning small mt-1">{{ $message }}</div>
-                    @enderror
-                </form>
             </div>
         </div>
 
@@ -95,15 +103,15 @@
             <span class="small footer-text">
                 {{ str_replace('{year}', date('Y'), setting('footer_copyright', '© '.date('Y').' '.setting('site_name'))) }}
             </span>
-            <div class="d-flex gap-3 small">
-                @foreach(\App\Models\Page::query()->active()->where('show_in_footer', true)->ordered()->get(['id', 'title', 'slug']) as $footerPage)
-                    <a href="{{ safe_route('frontend.page', $footerPage) }}" class="footer-text text-decoration-none">{{ $footerPage->title }}</a>
-                @endforeach
-            </div>
+            <span class="small footer-text">
+                Designed &amp; Developed by {{ setting('site_name') }}
+            </span>
         </div>
     </div>
 </footer>
 
+{{-- Newsletter success toast — shared by every newsletter form sitewide
+     (homepage section, Contact page section), not just the footer. --}}
 @if(session('newsletter_success'))
     @push('scripts')
         <script>

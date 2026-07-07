@@ -37,19 +37,26 @@ class MenuSeeder extends Seeder
             ['name' => 'Footer Quick Links', 'status' => 1]
         );
 
-        if ($footer->items()->doesntExist()) {
-            $items = [
-                ['label' => 'About Us', 'route_name' => 'frontend.about', 'sort_order' => 1],
-                ['label' => 'Our Services', 'route_name' => 'frontend.services.index', 'sort_order' => 2],
-                ['label' => 'Our Team', 'route_name' => 'frontend.teams.index', 'sort_order' => 3],
-                ['label' => 'FAQs', 'route_name' => 'frontend.faqs.index', 'sort_order' => 4],
-                ['label' => 'Careers', 'route_name' => 'frontend.careers.index', 'sort_order' => 5],
-                ['label' => 'Contact', 'route_name' => 'frontend.contact', 'sort_order' => 6],
-            ];
+        $footerItems = [
+            ['label' => 'Home', 'route_name' => 'frontend.home', 'sort_order' => 1],
+            ['label' => 'About Us', 'route_name' => 'frontend.about', 'sort_order' => 2],
+            ['label' => 'Services', 'route_name' => 'frontend.services.index', 'sort_order' => 3],
+            ['label' => 'Blog', 'route_name' => 'frontend.blogs.index', 'sort_order' => 4],
+            ['label' => 'Career', 'route_name' => 'frontend.careers.index', 'sort_order' => 5],
+            ['label' => 'Contact Us', 'route_name' => 'frontend.contact', 'sort_order' => 6],
+        ];
 
-            foreach ($items as $item) {
-                $footer->items()->create($item + ['status' => 1]);
-            }
+        foreach ($footerItems as $item) {
+            $footer->items()->updateOrCreate(
+                ['route_name' => $item['route_name']],
+                $item + ['status' => 1]
+            );
         }
+
+        // Prune any stale items outside the curated footer set (e.g. old
+        // Quick Links replaced by a later content audit).
+        $footer->items()
+            ->whereNotIn('route_name', collect($footerItems)->pluck('route_name'))
+            ->delete();
     }
 }

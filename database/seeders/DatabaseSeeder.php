@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             SettingSeeder::class,
             MenuSeeder::class,
+            LegalPageSeeder::class,
             SeoSettingSeeder::class,
             SocialLinkSeeder::class,
             HomeSectionSeeder::class,
