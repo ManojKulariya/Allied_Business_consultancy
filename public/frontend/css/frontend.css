@@ -92,18 +92,26 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 1030;
 }
 
-.site-header .navbar { transition: padding .3s ease; }
+/* Padding set in exact px, not Bootstrap's py-* steps (0/.25rem/.5rem…) —
+   those jump in 4px increments, too coarse to land a precise compact
+   target. 3px is the practical floor: enough that the logo doesn't touch
+   the header's bottom border, no more. */
+.site-header .navbar {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    transition: padding .3s ease;
+}
 
 /* .container is already a flex row in Bootstrap, but reinforced here so
    logo, nav and CTA stay on one vertical center line regardless of their
-   individual heights (52px logo vs ~35px nav links vs ~40px button). */
+   individual heights (62px logo vs ~30px nav links vs ~34px button). */
 .site-header .navbar > .container {
     align-items: center;
 }
 
-/* Sticky shrink: slightly tighter once scrolled — smooth, no jump */
+/* Sticky shrink: tighter once scrolled — smooth, no jump */
 .site-header.scrolled { box-shadow: 0 6px 24px rgba(15, 23, 42, .08); }
-.site-header.scrolled .navbar { padding-top: .15rem; padding-bottom: .15rem; }
+.site-header.scrolled .navbar { padding-top: 2px; padding-bottom: 2px; }
 
 /* Kill the .navbar-brand default padding/line-height (Bootstrap adds
    ~5px top+bottom and a 1.25rem line-height) — those are what created the
@@ -122,9 +130,9 @@ h1, h2, h3, h4, h5, h6 {
     transform-origin: left center;
 }
 
-/* Subtle logo shrink on scroll, matching the navbar's own compression */
+/* Logo shrinks 10% on scroll, matching the navbar's own compression */
 .site-header.scrolled .navbar-brand img {
-    transform: scale(.87);
+    transform: scale(.9);
 }
 
 .site-header .nav-link {
@@ -133,7 +141,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--theme-heading);
     font-weight: 500;
     line-height: 1;
-    padding: .65rem .8rem !important;
+    padding: .5rem .75rem !important;
     border-radius: 8px;
     transition: color .15s ease, background .15s ease;
 }
@@ -147,8 +155,9 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-flex;
     align-items: center;
     line-height: 1;
-    padding-top: .6rem;
-    padding-bottom: .6rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-radius: 8px;
 }
 
 .site-header .navbar-toggler { padding-block: .1rem; }
@@ -162,12 +171,12 @@ h1, h2, h3, h4, h5, h6 {
     transition: width .3s ease, height .3s ease;
 }
 
-/* Fallback (no uploaded logo) brand mark reads small next to a 52px logo
-   elsewhere on the site — scaled up to match in the header specifically. */
+/* Fallback (no uploaded logo) brand mark reads small next to the 62px
+   logo elsewhere on the site — scaled up to match in the header only. */
 .site-header .brand-mark {
-    width: 48px;
-    height: 48px;
-    font-size: 1.4rem;
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
 }
 
 .brand-text { color: var(--theme-primary); }
