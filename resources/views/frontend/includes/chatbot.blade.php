@@ -52,19 +52,19 @@
             <div class="abc-chatbot-lead-form d-none" id="abcChatbotLeadForm">
                 <p class="small fw-semibold mb-2"><i class="bi bi-person-lines-fill me-1"></i>Talk to an Expert</p>
                 <div class="mb-2">
-                    <label class="form-label mb-1">Full Name</label>
+                    <label class="form-label mb-1" for="abcLeadName">Full Name</label>
                     <input type="text" class="form-control form-control-sm" id="abcLeadName" required>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label mb-1">Phone Number</label>
+                    <label class="form-label mb-1" for="abcLeadPhone">Phone Number</label>
                     <input type="tel" class="form-control form-control-sm" id="abcLeadPhone" required>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label mb-1">Email Address</label>
+                    <label class="form-label mb-1" for="abcLeadEmail">Email Address</label>
                     <input type="email" class="form-control form-control-sm" id="abcLeadEmail" required>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label mb-1">Interested Service</label>
+                    <label class="form-label mb-1" for="abcLeadService">Interested Service</label>
                     <select class="form-select form-select-sm" id="abcLeadService">
                         <option value="">Select a service…</option>
                         @foreach($chatServices as $title)
@@ -74,7 +74,7 @@
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label mb-1">Message</label>
+                    <label class="form-label mb-1" for="abcLeadMessage">Message</label>
                     <textarea class="form-control form-control-sm" id="abcLeadMessage" rows="2" required></textarea>
                 </div>
                 <div class="d-flex gap-2">

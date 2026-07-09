@@ -26,7 +26,7 @@ class SettingSeeder extends Seeder
                 'contact_map_embed' => [
                     '<iframe src="https://maps.google.com/maps?q='
                         .'M-02%2C%20Shree%20Amar%20Heights%2C%20DCM%2C%20Ajmer%20Road%2C%20Nirman%20Nagar%2C%20Jaipur%20-%20302019'
-                        .'&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>',
+                        .'&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" title="Allied Business Consultancy office location"></iframe>',
                     'textarea',
                     'Google Map Embed Code',
                 ],
@@ -56,10 +56,12 @@ class SettingSeeder extends Seeder
                 'footer_newsletter_text' => ['Get the latest updates and insights delivered to your inbox.', 'textarea', 'Newsletter Text'],
             ],
             'seo' => [
-                'meta_title' => ['Allied Business Consultancy — Company Registration, GST & Tax Experts in Jaipur', 'text', 'Default Meta Title'],
+                'meta_title' => ['Allied Business Consultancy | Company Registration, GST & Tax Experts in Jaipur', 'text', 'Default Meta Title'],
                 'meta_description' => ['Allied Business Consultancy helps entrepreneurs start, manage, protect and grow their businesses — company registration, GST, income tax, accounting and compliance services in Jaipur, Rajasthan.', 'textarea', 'Default Meta Description'],
                 'meta_keywords' => ['business consultancy Jaipur, company registration Rajasthan, GST registration, income tax filing, chartered accountant Jaipur, business compliance', 'textarea', 'Default Meta Keywords'],
                 'og_image' => [null, 'image', 'Default Share Image'],
+                'twitter_handle' => [null, 'text', 'Twitter/X Handle (e.g. @alliedbiz)'],
+                'google_site_verification' => [null, 'text', 'Google Search Console Verification Code'],
             ],
             'announcement' => [
                 'announcement_enabled' => ['1', 'boolean', 'Show Announcement Bar'],
@@ -125,7 +127,7 @@ class SettingSeeder extends Seeder
                 'ga4_service_account_json' => [null, 'textarea', 'Google Service Account JSON (paste full file contents)'],
                 'clarity_project_id' => [null, 'text', 'Microsoft Clarity Project ID'],
                 'analytics_ip_ignore' => [null, 'textarea', 'IP Addresses to Ignore (one per line)'],
-                'analytics_cookie_consent' => ['0', 'boolean', 'Require Cookie Consent Before Tracking'],
+                'analytics_cookie_consent' => ['1', 'boolean', 'Require Cookie Consent Before Tracking'],
             ],
             'ai_chat' => [
                 'chat_enabled' => ['1', 'boolean', 'Enable Chatbot'],

@@ -34,6 +34,17 @@
         </div>
     @endunless
 
+    @if($configured && $analyticsError)
+        <div class="alert alert-danger d-flex align-items-start gap-2">
+            <i class="bi bi-x-octagon-fill fs-5"></i>
+            <div>
+                <strong>Google Analytics is connected but the last API request failed.</strong>
+                The cards below show 0 because no data could be fetched, not because traffic is zero.
+                <div class="mt-1 font-monospace small">{{ $analyticsError }}</div>
+            </div>
+        </div>
+    @endif
+
     {{-- ============ Top Cards ============ --}}
     @php
         $visitorCards = [

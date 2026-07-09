@@ -1,7 +1,10 @@
-{{-- Global theme: Google Fonts + dynamic CSS variables from Theme Settings --}}
+{{-- Global theme: Google Fonts + dynamic CSS variables from Theme Settings.
+     Fonts load non-blocking (already have display=swap, so text is never invisible
+     while waiting — safe to take them off the critical rendering path). --}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="{{ theme_google_fonts_url() }}" rel="stylesheet">
+<link rel="preload" href="{{ theme_google_fonts_url() }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="{{ theme_google_fonts_url() }}" rel="stylesheet"></noscript>
 
 <style>
     :root { {!! theme_css_vars() !!} }

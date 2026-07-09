@@ -85,6 +85,11 @@ Route::name('frontend.')->group(function () {
         Route::post('careers/{career:slug}/apply', ["{$frontend}\CareerController", 'apply'])->name('careers.apply');
     }
 
+    // XML sitemap — must be registered before the catch-all page route
+    // below, otherwise a literal "sitemap.xml" segment would be swallowed
+    // by {page:slug} first (same ordering lesson as the /admin 404 fix).
+    Route::get('sitemap.xml', ["{$frontend}\SitemapController", 'index'])->name('sitemap');
+
     // Dynamic CMS pages — keep LAST (catch-all slug).
     // Excludes "admin": routes/admin.php registers via a separate then()
     // callback in bootstrap/app.php that runs AFTER this whole file, so

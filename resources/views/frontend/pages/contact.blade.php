@@ -52,6 +52,7 @@
     {{-- ============ 2. Contact Information Cards ============ --}}
     <section class="section-pad" id="section-info-cards">
         <div class="container">
+            <h2 class="visually-hidden">Contact Information</h2>
             <div class="row g-4">
                 @foreach([
                     ['icon' => 'bi-telephone', 'title' => 'Call Us', 'value' => setting('contact_phone'), 'href' => 'tel:'.preg_replace('/[^0-9+]/', '', (string) setting('contact_phone'))],
@@ -62,7 +63,7 @@
                     <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="{{ $i * 80 }}">
                         <div class="premium-card p-4 text-center h-100">
                             <span class="icon-badge mb-3 mx-auto"><i class="bi {{ $card['icon'] }}"></i></span>
-                            <h6 class="mb-2">{{ $card['title'] }}</h6>
+                            <h3 class="h6 mb-2">{{ $card['title'] }}</h3>
                             @if($card['href'])
                                 <a href="{{ $card['href'] }}" class="small text-decoration-none" style="color: var(--theme-text); white-space: pre-line;" @if(str_starts_with($card['href'], 'https://maps')) target="_blank" rel="noopener" @endif>
                                     {{ $card['value'] }}
@@ -103,28 +104,28 @@
                             @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label small fw-semibold">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control @error('name', 'contact') is-invalid @enderror" value="{{ old('name') }}" required>
+                                    <label class="form-label small fw-semibold" for="contact-name">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" id="contact-name" class="form-control @error('name', 'contact') is-invalid @enderror" value="{{ old('name') }}" required>
                                     @error('name', 'contact')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label small fw-semibold">Phone Number <span class="text-danger">*</span></label>
-                                    <input type="tel" name="phone" class="form-control @error('phone', 'contact') is-invalid @enderror" value="{{ old('phone') }}" required>
+                                    <label class="form-label small fw-semibold" for="contact-phone">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="tel" name="phone" id="contact-phone" class="form-control @error('phone', 'contact') is-invalid @enderror" value="{{ old('phone') }}" required>
                                     @error('phone', 'contact')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label small fw-semibold">Email Address <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control @error('email', 'contact') is-invalid @enderror" value="{{ old('email') }}" required>
+                                    <label class="form-label small fw-semibold" for="contact-email">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="contact-email" class="form-control @error('email', 'contact') is-invalid @enderror" value="{{ old('email') }}" required>
                                     @error('email', 'contact')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label small fw-semibold">Company Name <span class="text-muted fw-normal">(Optional)</span></label>
-                                    <input type="text" name="company_name" class="form-control @error('company_name', 'contact') is-invalid @enderror" value="{{ old('company_name') }}">
+                                    <label class="form-label small fw-semibold" for="contact-company">Company Name <span class="text-muted fw-normal">(Optional)</span></label>
+                                    <input type="text" name="company_name" id="contact-company" class="form-control @error('company_name', 'contact') is-invalid @enderror" value="{{ old('company_name') }}">
                                     @error('company_name', 'contact')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label small fw-semibold">Service Interested In</label>
-                                    <select name="service_interested" class="form-select @error('service_interested', 'contact') is-invalid @enderror">
+                                    <label class="form-label small fw-semibold" for="contact-service">Service Interested In</label>
+                                    <select name="service_interested" id="contact-service" class="form-select @error('service_interested', 'contact') is-invalid @enderror">
                                         <option value="">Select a service…</option>
                                         @foreach($services as $service)
                                             <option value="{{ $service->title }}" @selected(old('service_interested') === $service->title)>{{ $service->title }}</option>
@@ -134,8 +135,8 @@
                                     @error('service_interested', 'contact')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label small fw-semibold">Message <span class="text-danger">*</span></label>
-                                    <textarea name="message" rows="4" class="form-control @error('message', 'contact') is-invalid @enderror" required>{{ old('message') }}</textarea>
+                                    <label class="form-label small fw-semibold" for="contact-message">Message <span class="text-danger">*</span></label>
+                                    <textarea name="message" id="contact-message" rows="4" class="form-control @error('message', 'contact') is-invalid @enderror" required>{{ old('message') }}</textarea>
                                     @error('message', 'contact')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-12">
@@ -192,7 +193,7 @@
                                 @else
                                     <span class="icon-badge mb-3 mx-auto"><i class="bi {{ $item->icon ?: 'bi-patch-check' }}"></i></span>
                                 @endif
-                                <h6 class="mb-2">{{ $item->title }}</h6>
+                                <h3 class="h6 mb-2">{{ $item->title }}</h3>
                                 <p class="small mb-0">{{ $item->description }}</p>
                             </div>
                         </div>
@@ -299,25 +300,28 @@
         </div>
     </section>
 
-    {{-- Local Business Schema (JSON-LD) --}}
-    <script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": @json(setting('site_name', config('app.name'))),
-        "image": @json(setting('site_logo') ? uploaded_asset(setting('site_logo')) : null),
-        "telephone": @json(setting('contact_phone')),
-        "email": @json(setting('contact_email')),
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "M-02, Mezzanine Floor, Shree Amar Heights, DCM, Ajmer Road, Nirman Nagar",
-            "addressLocality": "Jaipur",
-            "addressRegion": "Rajasthan",
-            "postalCode": "302019",
-            "addressCountry": "IN"
-        },
-        "url": @json(route('frontend.contact')),
-        "openingHours": @json(setting('working_hours'))
-    }
-    </script>
+    {{-- Local Business + ContactPage Schema (JSON-LD) --}}
+    @php
+        $localBusinessSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'LocalBusiness',
+            'name' => setting('site_name', config('app.name')),
+            'image' => setting('site_logo') ? uploaded_asset(setting('site_logo')) : null,
+            'telephone' => setting('contact_phone'),
+            'email' => setting('contact_email'),
+            'address' => business_address_schema(),
+            'url' => route('frontend.contact'),
+            'openingHours' => setting('working_hours'),
+        ];
+
+        $contactPageSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'ContactPage',
+            'name' => 'Contact Us',
+            'url' => route('frontend.contact'),
+            'about' => ['@type' => 'Organization', 'name' => setting('site_name', config('app.name'))],
+        ];
+    @endphp
+    {!! json_ld($localBusinessSchema) !!}
+    {!! json_ld($contactPageSchema) !!}
 @endsection

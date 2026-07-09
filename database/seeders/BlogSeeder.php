@@ -14,10 +14,10 @@ use Illuminate\Database\Seeder;
 class BlogSeeder extends Seeder
 {
     private const CATEGORIES = [
-        'GST & Tax Updates',
-        'Business Registration',
-        'Compliance & Regulatory',
-        'Growth & Strategy',
+        'GST & Tax Updates' => 'GST registration, filing deadlines, rate changes and compliance updates explained in plain language.',
+        'Business Registration' => 'Company registration, LLP formation and startup incorporation guides for entrepreneurs in India.',
+        'Compliance & Regulatory' => 'ROC filings, MCA compliance, statutory deadlines and regulatory changes businesses need to track.',
+        'Growth & Strategy' => 'Financial planning, virtual CFO insights and practical strategy advice for growing businesses.',
     ];
 
     public function run(): void
@@ -29,10 +29,10 @@ class BlogSeeder extends Seeder
         $categories = [];
         $order = 0;
 
-        foreach (self::CATEGORIES as $name) {
+        foreach (self::CATEGORIES as $name => $description) {
             $categories[$name] = BlogCategory::query()->firstOrCreate(
                 ['name' => $name],
-                ['sort_order' => ++$order, 'status' => 1]
+                ['sort_order' => ++$order, 'status' => 1, 'meta_description' => $description]
             );
         }
 

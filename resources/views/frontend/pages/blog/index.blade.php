@@ -4,6 +4,8 @@
     $pageTitle = $activeCategory?->name ?? ($search ? 'Search: '.$search : 'Blog & Insights');
     View::share('seoTitle', ($activeCategory?->meta_title ?: $pageTitle).' — '.setting('site_name', 'Allied Business Consultancy'));
     View::share('seoDescription', $activeCategory?->meta_description ?: 'Expert insights on GST, income tax, company registration and business compliance from Allied Business Consultancy.');
+    // Internal search-result pages are duplicate/thin content — keep them out of the index.
+    View::share('seoNoIndex', (bool) $search);
 @endphp
 
 @section('content')
@@ -28,6 +30,7 @@
     <div class="container section-pad">
         <div class="row g-5">
             <div class="col-lg-8">
+                <h2 class="visually-hidden">{{ $activeCategory ? $activeCategory->name.' Articles' : 'Articles' }}</h2>
                 {{-- ============ Featured post ============ --}}
                 @if($featured)
                     <div class="featured-post-card mb-5" data-aos="fade-up">

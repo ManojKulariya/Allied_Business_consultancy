@@ -42,9 +42,37 @@ class GoogleAnalyticsService
 
     private bool $clientResolved = false;
 
+    private ?string $lastError = null;
+
     public function isConfigured(): bool
     {
         return (bool) setting('ga4_property_id') && (bool) setting('ga4_service_account_json');
+    }
+
+    /**
+     * Human-readable reason the most recent failed API call/report() failed,
+     * or null if the last call succeeded (or none has run yet this request).
+     * Surfaced on the dashboard so a broken integration never just shows 0s.
+     */
+    public function getLastError(): ?string
+    {
+        return $this->lastError;
+    }
+
+    private function describeException(\Throwable $e): string
+    {
+        if ($e instanceof \Google\ApiCore\ApiException) {
+            $reason = $e->getReason();
+            $message = $e->getBasicMessage() ?: $e->getMessage();
+
+            return match ($reason) {
+                'SERVICE_DISABLED' => 'Google Analytics Data API is not enabled on the connected Google Cloud project. Enable "Google Analytics Data API" in Google Cloud Console, then wait a few minutes and retry.',
+                'PERMISSION_DENIED', 'IAM_PERMISSION_DENIED' => 'The service account does not have access to this GA4 property. Add its email as a Viewer under GA4 Admin → Property Access Management.',
+                default => $message !== '' ? $message : (string) $e->getStatus(),
+            };
+        }
+
+        return get_class($e).': '.$e->getMessage();
     }
 
     /**
@@ -449,10 +477,12 @@ class GoogleAnalyticsService
 
         try {
             $result = $callback();
+            $this->lastError = null;
             Cache::put($cacheKey, $result, self::CACHE_MINUTES * 60);
 
             return $result;
         } catch (\Throwable $e) {
+            $this->lastError = $this->describeException($e);
             report($e);
 
             return null;
@@ -474,12 +504,15 @@ class GoogleAnalyticsService
         $credentials = json_decode((string) setting('ga4_service_account_json'), true);
 
         if (! is_array($credentials)) {
+            $this->lastError = 'Service Account JSON is invalid or not valid JSON.';
+
             return null;
         }
 
         try {
             $this->client = new BetaAnalyticsDataClient(['credentials' => $credentials]);
         } catch (\Throwable $e) {
+            $this->lastError = $this->describeException($e);
             report($e);
             $this->client = null;
         }

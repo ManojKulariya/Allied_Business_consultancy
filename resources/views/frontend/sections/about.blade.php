@@ -73,7 +73,8 @@
 
                 <div class="d-flex flex-wrap align-items-center gap-4">
                     @if($section->cta_text)
-                        <a href="{{ url($section->cta_url ?: '#') }}" class="btn btn-primary px-4">
+                        <a href="{{ url($section->cta_url ?: '#') }}" class="btn btn-primary px-4"
+                           aria-label="{{ $section->cta_text }} — {{ setting('site_name', config('app.name')) }}">
                             {{ $section->cta_text }} <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     @endif

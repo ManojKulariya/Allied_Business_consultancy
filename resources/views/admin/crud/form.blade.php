@@ -169,4 +169,7 @@
                 .attr('class', 'bi icon-preview ' + this.value.trim());
         });
     </script>
+    @if(collect($fields)->contains('name', 'meta_title'))
+        @include('admin.settings.partials.seo-preview')
+    @endif
 @endpush

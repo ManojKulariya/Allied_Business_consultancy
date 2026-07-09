@@ -21,7 +21,7 @@
                         <div class="team-card">
                             <div class="team-photo-wrap mb-3">
                                 <img src="{{ uploaded_asset($member->image, 'https://ui-avatars.com/api/?size=400&background=E2E8F0&color=0B3C5D&name='.urlencode($member->name)) }}"
-                                     alt="{{ $member->name }}" loading="lazy">
+                                     alt="{{ $member->name }}" loading="lazy" width="300" height="340">
                                 @if($member->social_links)
                                     <div class="team-socials">
                                         @foreach(['linkedin' => 'bi-linkedin', 'twitter' => 'bi-twitter-x', 'facebook' => 'bi-facebook', 'instagram' => 'bi-instagram'] as $platform => $icon)
@@ -34,7 +34,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <h6 class="mb-0">{{ $member->name }}</h6>
+                            <h3 class="h6 mb-0">{{ $member->name }}</h3>
                             <small style="color: var(--theme-secondary);">{{ $member->designation }}</small>
                             @if($member->bio)
                                 <p class="small mt-2 mb-0">{{ Str::limit($member->bio, 80) }}</p>
@@ -45,4 +45,20 @@
             </div>
         </div>
     </section>
+
+    {{-- Person schema for each displayed team member --}}
+    @php
+        $teamPersonSchemas = $members->map(fn ($member) => [
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            'name' => $member->name,
+            'jobTitle' => $member->designation,
+            'image' => $member->image ? uploaded_asset($member->image) : null,
+            'worksFor' => ['@type' => 'Organization', 'name' => setting('site_name', config('app.name'))],
+            'sameAs' => array_values(array_filter($member->social_links ?? [])),
+        ]);
+    @endphp
+    @foreach($teamPersonSchemas as $personSchema)
+        {!! json_ld($personSchema) !!}
+    @endforeach
 @endif

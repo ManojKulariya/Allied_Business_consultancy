@@ -88,7 +88,7 @@
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
                     <div class="premium-card p-4">
                         <span class="icon-badge mb-3"><i class="bi {{ $ovIcon }}"></i></span>
-                        <h5 class="mb-2">{{ $ovTitle }}</h5>
+                        <h3 class="h5 mb-2">{{ $ovTitle }}</h3>
                         <p class="small mb-0">{{ $ovText }}</p>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($i % 3) * 100 }}">
                     <div class="premium-card p-4 text-center">
                         <span class="icon-badge mb-3 mx-auto"><i class="bi {{ $bIcon }}"></i></span>
-                        <h6 class="mb-2">{{ $bTitle }}</h6>
+                        <h3 class="h6 mb-2">{{ $bTitle }}</h3>
                         <p class="small mb-0">{{ $bText }}</p>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                             <i class="bi {{ $eIcon }}"></i>
                         </span>
                         <div>
-                            <h6 class="mb-1 small fw-bold">{{ $eTitle }}</h6>
+                            <h3 class="h6 mb-1 small fw-bold">{{ $eTitle }}</h3>
                             <p class="small mb-0 text-muted">{{ $eText }}</p>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                     <div class="process-step">
                         <span class="process-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         <div class="step-icon"><i class="bi {{ $pIcon }}"></i></div>
-                        <h6>{{ $pTitle }}</h6>
+                        <h3 class="h6">{{ $pTitle }}</h3>
                         <p class="small mb-0 text-muted">{{ $pText }}</p>
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                             <i class="bi {{ $wIcon }}"></i>
                         </span>
                         <div>
-                            <h6 class="mb-1 small fw-bold">{{ $wTitle }}</h6>
+                            <h3 class="h6 mb-1 small fw-bold">{{ $wTitle }}</h3>
                             <p class="small mb-0 text-muted">{{ $wText }}</p>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
 
                 <div class="service-cta-card p-4 p-lg-5 mt-4">
                     <div class="accent-line mb-3"></div>
-                    <h5 class="text-white mb-2">Get a Free Consultation</h5>
+                    <h3 class="h5 text-white mb-2">Get a Free Consultation</h3>
                     <p class="small mb-4" style="color: rgba(255,255,255,.72);">
                         Speak to a registration expert — free, no obligations.
                     </p>
@@ -288,11 +288,9 @@
     </div>
 </section>
 
-{{-- FAQ structured data for search engines (first three questions).
-     Built with json_encode in a raw PHP block so the schema.org context
-     key never appears literally in the template (directive collision). --}}
+{{-- FAQ + Service structured data for search engines. --}}
 @php
-    $faqSchemaJson = json_encode([
+    $faqSchema = [
         '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => collect($page['faqs'])->take(3)->map(fn ($faq) => [
@@ -300,6 +298,23 @@
             'name' => $faq[0],
             'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq[1]],
         ])->values()->all(),
-    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ];
+
+    $serviceSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Service',
+        'name' => $page['title'],
+        'description' => $page['seo_description'] ?? $page['intro'],
+        'serviceType' => $page['category']['label'] ?? null,
+        'provider' => [
+            '@type' => 'Organization',
+            'name' => setting('site_name', config('app.name')),
+            'telephone' => setting('contact_phone'),
+            'url' => url('/'),
+        ],
+        'areaServed' => ['@type' => 'State', 'name' => 'Rajasthan'],
+        'url' => url()->current(),
+    ];
 @endphp
-<script type="application/ld+json">{!! $faqSchemaJson !!}</script>
+{!! json_ld($faqSchema) !!}
+{!! json_ld($serviceSchema) !!}

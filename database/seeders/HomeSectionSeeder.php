@@ -25,7 +25,7 @@ class HomeSectionSeeder extends Seeder
                 'cta_text' => 'Book Free Consultation',
                 'cta_url' => '/contact-us',
                 'cta_text_2' => 'Explore Services',
-                'cta_url_2' => '/services',
+                'cta_url_2' => null,
                 'data' => [
                     'small_heading' => 'Trusted by 250+ businesses',
                     'highlight_text' => 'Trusted Financial Expertise',

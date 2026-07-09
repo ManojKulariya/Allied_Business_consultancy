@@ -33,10 +33,13 @@ class AnalyticsController extends Controller
 
         $configured = $this->analytics->isConfigured();
 
+        $visitorSummary = $configured ? $this->analytics->getVisitorSummary() : null;
+
         return view('admin.analytics.index', [
             'configured' => $configured,
+            'analyticsError' => $configured ? $this->analytics->getLastError() : null,
             'clarityConfigured' => $this->clarity->isConfigured(),
-            'visitorSummary' => $configured ? $this->analytics->getVisitorSummary() : null,
+            'visitorSummary' => $visitorSummary,
             'engagement' => $configured ? $this->analytics->getEngagementMetrics($start, $end) : null,
             'trafficSources' => $configured ? $this->analytics->getTrafficSources($start, $end) : [],
             'visitorTrend' => $configured ? $this->analytics->getVisitorTrend('7d') : [],

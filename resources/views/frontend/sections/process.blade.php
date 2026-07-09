@@ -18,7 +18,7 @@
                             @if($step->icon)
                                 <div class="mt-3 fs-3" style="color: var(--theme-secondary);"><i class="bi {{ $step->icon }}"></i></div>
                             @endif
-                            <h6 class="mt-2 mb-2">{{ $step->title }}</h6>
+                            <h3 class="h6 mt-2 mb-2">{{ $step->title }}</h3>
                             <p class="small mb-0">{{ $step->description }}</p>
                         </div>
                     </div>

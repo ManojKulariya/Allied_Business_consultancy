@@ -19,7 +19,7 @@
                             @else
                                 <span class="icon-badge mb-3 mx-auto"><i class="bi {{ $industry->icon ?: 'bi-diagram-3' }}"></i></span>
                             @endif
-                            <h6 class="mb-1">{{ $industry->name }}</h6>
+                            <h3 class="h6 mb-1">{{ $industry->name }}</h3>
                             @if($industry->description)
                                 <p class="small mb-0">{{ Str::limit($industry->description, 70) }}</p>
                             @endif

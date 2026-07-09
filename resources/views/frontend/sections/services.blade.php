@@ -31,7 +31,7 @@
                                 <span class="icon-badge mb-3"><i class="bi {{ $service->icon ?: 'bi-briefcase' }}"></i></span>
                             @endif
 
-                            <h5 class="mb-2">{{ $service->title }}</h5>
+                            <h3 class="h5 mb-2">{{ $service->title }}</h3>
                             <p class="small mb-3">{{ Str::limit($service->excerpt, 120) }}</p>
                             <a href="{{ safe_route('frontend.services.show', $service) }}" class="card-link">
                                 Learn More <i class="bi bi-arrow-right"></i>
@@ -43,7 +43,7 @@
 
             @if($section->cta_text)
                 <div class="text-center mt-5" data-aos="fade-up">
-                    <a href="{{ url($section->cta_url ?: '/services') }}" class="btn btn-primary px-4">
+                    <a href="{{ $section->cta_url ? url($section->cta_url) : safe_route('frontend.services.index') }}" class="btn btn-primary px-4">
                         {{ $section->cta_text }} <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>

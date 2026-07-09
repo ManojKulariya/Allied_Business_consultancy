@@ -21,7 +21,7 @@
                             @else
                                 <span class="icon-badge mb-3 mx-auto"><i class="bi {{ $item->icon ?: 'bi-patch-check' }}"></i></span>
                             @endif
-                            <h6 class="mb-2">{{ $item->title }}</h6>
+                            <h3 class="h6 mb-2">{{ $item->title }}</h3>
                             <p class="small mb-0">{{ $item->description }}</p>
                         </div>
                     </div>

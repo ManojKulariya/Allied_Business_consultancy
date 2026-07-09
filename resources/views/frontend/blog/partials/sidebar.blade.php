@@ -12,8 +12,8 @@
         <form method="GET" action="{{ safe_route('frontend.blogs.index') }}">
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="Search articles…"
-                       value="{{ $search ?? request('search') }}">
-                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                       aria-label="Search articles" value="{{ $search ?? request('search') }}">
+                <button class="btn btn-primary" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
             </div>
         </form>
     </div>
@@ -21,7 +21,7 @@
     {{-- Recent posts --}}
     @if(($sidebarRecent ?? collect())->isNotEmpty())
         <div class="widget-card mb-4">
-            <h6 class="widget-title">Recent Posts</h6>
+            <h3 class="h6 widget-title">Recent Posts</h3>
             <ul class="list-unstyled widget-post-list mb-0">
                 @foreach($sidebarRecent as $post)
                     <li>
@@ -41,7 +41,7 @@
     {{-- Categories --}}
     @if(($sidebarCategories ?? collect())->isNotEmpty())
         <div class="widget-card mb-4">
-            <h6 class="widget-title">Categories</h6>
+            <h3 class="h6 widget-title">Categories</h3>
             <ul class="list-unstyled widget-category-list mb-0">
                 @foreach($sidebarCategories as $cat)
                     <li>
@@ -59,7 +59,7 @@
     {{-- Popular posts --}}
     @if(($sidebarPopular ?? collect())->isNotEmpty())
         <div class="widget-card mb-4">
-            <h6 class="widget-title">Popular Posts</h6>
+            <h3 class="h6 widget-title">Popular Posts</h3>
             <ul class="list-unstyled widget-post-list mb-0">
                 @foreach($sidebarPopular as $post)
                     <li>
@@ -78,15 +78,15 @@
 
     {{-- Newsletter --}}
     <div class="widget-card mb-4 widget-newsletter">
-        <h6 class="widget-title text-white">
+        <h3 class="h6 widget-title text-white">
             <i class="bi bi-envelope-heart me-1"></i> {{ setting('footer_newsletter_title', 'Subscribe to Our Newsletter') }}
-        </h6>
+        </h3>
         <p class="small mb-3" style="color: rgba(255,255,255,.75);">
             {{ setting('footer_newsletter_text', 'Get the latest insights delivered to your inbox.') }}
         </p>
         <form method="POST" action="{{ safe_route('frontend.newsletter.subscribe') }}">
             @csrf
-            <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required>
+            <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" aria-label="Email address" required>
             <button class="btn btn-accent w-100" type="submit">Subscribe</button>
             @error('email')
                 <div class="text-warning small mt-2">{{ $message }}</div>
@@ -97,7 +97,7 @@
     {{-- Consultation CTA --}}
     <div class="service-cta-card p-4">
         <div class="accent-line mb-3"></div>
-        <h6 class="text-white mb-2">Need Expert Advice?</h6>
+        <h3 class="h6 text-white mb-2">Need Expert Advice?</h3>
         <p class="small mb-3" style="color: rgba(255,255,255,.72);">
             Talk to a business consultant — free, no obligations.
         </p>

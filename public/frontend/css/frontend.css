@@ -637,6 +637,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer-heading { color: #fff; font-weight: 700; margin-bottom: 1.1rem; }
 .footer-text { color: rgba(255, 255, 255, .55); }
 .footer-links li { margin-bottom: .55rem; }
+.footer-links li > span { color: rgba(255, 255, 255, .65); }
 .footer-links a { color: rgba(255, 255, 255, .6); text-decoration: none; transition: color .15s ease, padding-left .15s ease; }
 .footer-links a:hover { color: var(--theme-accent); padding-left: 3px; }
 .footer-bottom { border-color: rgba(255, 255, 255, .08) !important; }

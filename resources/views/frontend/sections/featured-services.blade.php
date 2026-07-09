@@ -29,7 +29,7 @@
                         <a href="{{ safe_route('frontend.services.show', $service) }}"
                            class="premium-card p-4 d-block text-decoration-none h-100">
                             <span class="icon-badge mb-3"><i class="bi {{ $service->icon ?: 'bi-star' }}"></i></span>
-                            <h6 class="mb-2">{{ $service->title }}</h6>
+                            <h3 class="h6 mb-2">{{ $service->title }}</h3>
                             <p class="small mb-0" style="color: var(--theme-text);">{{ Str::limit($service->excerpt, 90) }}</p>
                         </a>
                     </div>

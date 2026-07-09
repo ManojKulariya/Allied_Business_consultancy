@@ -40,6 +40,7 @@
     <div class="container section-pad">
         <div class="row g-5">
             <div class="col-lg-8">
+                <h2 class="visually-hidden">Article</h2>
                 {{-- ============ Social share ============ --}}
                 <div class="social-share d-flex flex-wrap align-items-center gap-2 mb-4" data-aos="fade-up">
                     <span class="small fw-semibold me-1" style="color: var(--theme-heading);">Share:</span>
@@ -66,7 +67,7 @@
 
                 {{-- ============ Table of contents (auto-built from H2/H3 by JS) ============ --}}
                 <div class="toc-card mb-4 d-none" id="tocCard" data-aos="fade-up">
-                    <h6 class="widget-title"><i class="bi bi-list-ul me-1"></i> On This Page</h6>
+                    <h3 class="h6 widget-title"><i class="bi bi-list-ul me-1"></i> On This Page</h3>
                     <ul class="list-unstyled mb-0" id="tocList"></ul>
                 </div>
 
@@ -89,7 +90,7 @@
 
                 {{-- ============ Comment placeholder ============ --}}
                 <div class="mt-5 pt-4 border-top" data-aos="fade-up">
-                    <h5 class="mb-3"><i class="bi bi-chat-square-text me-2"></i>Comments</h5>
+                    <h3 class="h5 mb-3"><i class="bi bi-chat-square-text me-2"></i>Comments</h3>
                     <div class="premium-card p-4 text-center text-muted">
                         <i class="bi bi-chat-dots display-6 d-block mb-2 opacity-50"></i>
                         Comments are coming soon. In the meantime, reach out via our
@@ -145,7 +146,7 @@
                             <form method="POST" action="{{ safe_route('frontend.newsletter.subscribe') }}">
                                 @csrf
                                 <div class="input-group input-group-lg">
-                                    <input type="email" name="email" class="form-control" placeholder="Enter your email address" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Enter your email address" aria-label="Email address" required>
                                     <button class="btn btn-primary px-4" type="submit">Subscribe <i class="bi bi-send ms-1"></i></button>
                                 </div>
                                 @error('email')<div class="text-danger small mt-2">{{ $message }}</div>@enderror
@@ -184,7 +185,7 @@
 
     {{-- Article + Breadcrumb schema for search engines --}}
     @php
-        $articleSchemaJson = json_encode([
+        $articleSchema = [
             '@context' => 'https://schema.org',
             '@type' => 'BlogPosting',
             'headline' => $blog->title,
@@ -195,9 +196,9 @@
             'author' => ['@type' => 'Organization', 'name' => $blog->creator?->name ?? setting('site_name')],
             'publisher' => ['@type' => 'Organization', 'name' => setting('site_name')],
             'mainEntityOfPage' => url()->current(),
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        ];
     @endphp
-    <script type="application/ld+json">{!! $articleSchemaJson !!}</script>
+    {!! json_ld($articleSchema) !!}
 @endsection
 
 @push('scripts')

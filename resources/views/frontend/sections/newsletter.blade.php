@@ -14,7 +14,7 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                   placeholder="Enter your email address" required value="{{ old('email') }}">
+                                   placeholder="Enter your email address" aria-label="Email address" required value="{{ old('email') }}">
                             <button class="btn btn-primary px-4" type="submit">
                                 Subscribe <i class="bi bi-send ms-1"></i>
                             </button>

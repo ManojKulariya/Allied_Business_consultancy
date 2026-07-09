@@ -23,16 +23,23 @@ class Seo extends Component
         ?string $description = null,
         ?string $keywords = null,
         ?string $image = null,
+        ?bool $noIndex = null,
     ) {
         $routeSeo = SeoSetting::forRoute(Route::currentRouteName());
 
         $modelSeo = ($model && method_exists($model, 'seoData')) ? $model->seoData() : [];
 
+        $siteName = setting('site_name', config('app.name'));
+
+        $resolvedTitle = $title
+            ?? ($modelSeo['title'] ?? null)
+            ?? $routeSeo?->meta_title
+            ?? setting('meta_title', $siteName);
+
+        $locale = app()->getLocale();
+
         $this->seo = [
-            'title' => $title
-                ?? ($modelSeo['title'] ?? null)
-                ?? $routeSeo?->meta_title
-                ?? setting('meta_title', setting('site_name', config('app.name'))),
+            'title' => $this->withSiteNameSuffix($resolvedTitle, $siteName),
             'description' => $description
                 ?? ($modelSeo['description'] ?? null)
                 ?? $routeSeo?->meta_description
@@ -45,12 +52,27 @@ class Seo extends Component
                 ?? ($modelSeo['image'] ?? null)
                 ?? $routeSeo?->meta_image
                 ?? setting('og_image'),
-            'canonical' => $modelSeo['canonical'] ?? url()->current(),
+            'canonical' => $modelSeo['canonical'] ?? canonical_url(),
             'og_type' => $routeSeo?->og_type ?? 'website',
+            'og_locale' => str_contains($locale, '_') ? $locale : "{$locale}_IN",
             'twitter_card' => $routeSeo?->twitter_card ?? 'summary_large_image',
-            'no_index' => (bool) ($routeSeo?->no_index ?? false),
+            'twitter_site' => setting('twitter_handle'),
+            'no_index' => $noIndex ?? (bool) ($routeSeo?->no_index ?? false),
             'schema' => $routeSeo?->schema_markup,
+            'author' => $siteName,
+            'theme_color' => setting('theme_primary_color', '#0B3C5D'),
+            'google_site_verification' => setting('google_site_verification'),
         ];
+    }
+
+    /**
+     * Append " | {site name}" unless the title already mentions it, so every
+     * title source (model, route default, site default) gets the convention
+     * for free without hand-editing each seeded/model record.
+     */
+    private function withSiteNameSuffix(string $title, string $siteName): string
+    {
+        return str_contains($title, $siteName) ? $title : "{$title} | {$siteName}";
     }
 
     public function render(): View

@@ -13,7 +13,7 @@
 <article {{ $attributes->merge(['class' => 'premium-card blog-card overflow-hidden']) }}>
     <div class="img-wrap">
         <a href="{{ safe_route('frontend.blogs.show', $blog) }}">
-            <img src="{{ uploaded_asset($blog->image) }}" alt="{{ $blog->title }}" class="w-100" loading="lazy">
+            <img src="{{ uploaded_asset($blog->image) }}" alt="{{ $blog->title }}" class="w-100" loading="lazy" width="640" height="360">
         </a>
     </div>
     <div class="{{ $compact ? 'p-3' : 'p-4' }}">
@@ -26,11 +26,11 @@
                 <i class="bi bi-clock me-1"></i>{{ $blog->reading_time }} min read
             @endif
         </div>
-        <h5 class="{{ $compact ? 'h6' : '' }} mb-2">
+        <h3 class="{{ $compact ? 'h6' : 'h5' }} mb-2">
             <a href="{{ safe_route('frontend.blogs.show', $blog) }}" class="text-decoration-none" style="color: var(--theme-heading);">
                 {{ Str::limit($blog->title, $compact ? 50 : 62) }}
             </a>
-        </h5>
+        </h3>
         @unless($compact)
             <p class="small mb-3">{{ Str::limit($blog->excerpt, 100) }}</p>
             @if($detailed)
@@ -38,12 +38,12 @@
                     <span class="small text-muted">
                         <i class="bi bi-person-circle me-1"></i>{{ $blog->creator?->name ?? setting('site_name') }}
                     </span>
-                    <a href="{{ safe_route('frontend.blogs.show', $blog) }}" class="card-link">
+                    <a href="{{ safe_route('frontend.blogs.show', $blog) }}" class="card-link" aria-label="Read more: {{ $blog->title }}">
                         Read More <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             @else
-                <a href="{{ safe_route('frontend.blogs.show', $blog) }}" class="card-link">
+                <a href="{{ safe_route('frontend.blogs.show', $blog) }}" class="card-link" aria-label="Read more: {{ $blog->title }}">
                     Read More <i class="bi bi-arrow-right"></i>
                 </a>
             @endif

@@ -40,4 +40,16 @@
             </div>
         </div>
     </div>
+
+    {{-- AboutPage schema for the About Us page, generic WebPage schema for every other CMS page --}}
+    @php
+        $pageSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => $page->slug === 'about-us' ? 'AboutPage' : 'WebPage',
+            'name' => $page->title,
+            'description' => $page->meta_description ?: $page->subtitle,
+            'url' => url()->current(),
+        ];
+    @endphp
+    {!! json_ld($pageSchema) !!}
 @endsection

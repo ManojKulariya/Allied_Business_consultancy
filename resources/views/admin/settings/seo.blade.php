@@ -82,3 +82,7 @@
         @endforeach
     </div>
 @endsection
+
+@push('scripts')
+    @include('admin.settings.partials.seo-preview')
+@endpush

@@ -49,7 +49,7 @@
 
             {{-- Column 2: Quick Links (Menus module, location: footer) --}}
             <div class="col-lg-2 col-md-6">
-                <h6 class="footer-heading">Quick Links</h6>
+                <h3 class="h6 footer-heading">Quick Links</h3>
                 <ul class="list-unstyled footer-links">
                     @foreach(menu_tree('footer')?->items ?? [] as $link)
                         <li><a href="{{ $link->resolved_url }}"><i class="bi bi-chevron-right small me-1"></i>{{ $link->label }}</a></li>
@@ -59,7 +59,7 @@
 
             {{-- Column 3: Popular Services (curated category subset) --}}
             <div class="col-lg-3 col-md-6">
-                <h6 class="footer-heading">Popular Services</h6>
+                <h3 class="h6 footer-heading">Popular Services</h3>
                 <ul class="list-unstyled footer-links">
                     @php
                         $popularSlugs = [
@@ -86,7 +86,7 @@
 
             {{-- Column 4: Legal (Pages module, show_in_footer) --}}
             <div class="col-lg-3 col-md-6">
-                <h6 class="footer-heading">Legal</h6>
+                <h3 class="h6 footer-heading">Legal</h3>
                 <ul class="list-unstyled footer-links">
                     @foreach(\App\Models\Page::query()->active()->where('show_in_footer', true)->ordered()->get(['id', 'title', 'slug']) as $legalPage)
                         <li>

@@ -116,7 +116,7 @@ if (! function_exists('uploaded_asset')) {
     /**
      * Resolve a stored file path to a public URL, with placeholder fallback.
      */
-    function uploaded_asset(?string $path, string $placeholder = 'frontend/img/placeholder.png'): string
+    function uploaded_asset(?string $path, string $placeholder = 'frontend/img/placeholder.svg'): string
     {
         if ($path && Storage::disk('public')->exists($path)) {
             return Storage::disk('public')->url($path);
@@ -224,6 +224,56 @@ if (! function_exists('theme_google_fonts_url')) {
             ->implode('&');
 
         return "https://fonts.googleapis.com/css2?{$families}&display=swap";
+    }
+}
+
+if (! function_exists('canonical_url')) {
+    /**
+     * Current URL stripped of tracking query params (utm_*, gclid, fbclid)
+     * so campaign links never produce duplicate canonical targets.
+     */
+    function canonical_url(): string
+    {
+        $query = collect(request()->query())
+            ->reject(fn ($value, string $key) => $key === 'utm_source' || $key === 'utm_medium'
+                || $key === 'utm_campaign' || $key === 'utm_term' || $key === 'utm_content'
+                || $key === 'gclid' || $key === 'fbclid')
+            ->all();
+
+        return $query === [] ? url()->current() : url()->current().'?'.http_build_query($query);
+    }
+}
+
+if (! function_exists('json_ld')) {
+    /**
+     * Encode a Schema.org array as a safe <script type="application/ld+json"> tag.
+     * Centralizes the JSON_UNESCAPED_SLASHES/UNICODE flags and the escaping
+     * needed to keep "@context" out of raw Blade (which treats it as a directive).
+     */
+    function json_ld(array $data): \Illuminate\Support\HtmlString
+    {
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        return new \Illuminate\Support\HtmlString('<script type="application/ld+json">'.$json.'</script>');
+    }
+}
+
+if (! function_exists('business_address_schema')) {
+    /**
+     * Shared Schema.org PostalAddress fields — reused by the sitewide
+     * Organization schema and the Contact page's LocalBusiness schema so
+     * the address is hardcoded in exactly one place.
+     */
+    function business_address_schema(): array
+    {
+        return [
+            '@type' => 'PostalAddress',
+            'streetAddress' => 'M-02, Mezzanine Floor, Shree Amar Heights, DCM, Ajmer Road, Nirman Nagar',
+            'addressLocality' => 'Jaipur',
+            'addressRegion' => 'Rajasthan',
+            'postalCode' => '302019',
+            'addressCountry' => 'IN',
+        ];
     }
 }
 
