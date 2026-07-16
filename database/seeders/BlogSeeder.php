@@ -192,6 +192,7 @@ class BlogSeeder extends Seeder
             [
                 'blog_category_id' => $categories['Growth & Strategy']->id,
                 'title' => '7 Signs Your Business Needs a Virtual CFO',
+                'meta_title' => 'Do You Need a Virtual CFO?',
                 'excerpt' => 'You don\'t need a full-time CFO to get CFO-level financial thinking. Here are the signals that tell you it\'s time to bring in senior financial leadership.',
                 'is_featured' => false,
                 'tags' => ['Virtual CFO', 'Financial Leadership', 'Growth'],
@@ -227,6 +228,7 @@ class BlogSeeder extends Seeder
             [
                 'blog_category_id' => $categories['Compliance & Regulatory']->id,
                 'title' => 'TDS Return Filing: A Practical Guide for Employers',
+                'meta_title' => 'TDS Return Filing Guide',
                 'excerpt' => 'Everything an employer needs to know about quarterly TDS compliance — from the ECR filing cycle to the penalties that follow a missed deadline.',
                 'is_featured' => false,
                 'tags' => ['TDS', 'Payroll', 'Compliance'],

@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Registered Office Change',
     'category' => ['label' => 'ROC & MCA Compliance', 'slug' => 'roc-mca-compliance'],
     'eyebrow_icon' => 'bi-geo-alt',
-    'seo_title' => 'Registered Office Address Change — MCA Filing',
+    'seo_title' => 'Registered Office Change',
     'seo_description' => 'Change your company\'s registered office address — within city, across cities, or between states — with correct INC-22/INC-23 MCA filing, typically completed in 7–30 working days.',
     'intro' => 'Moving offices, or moving states? We handle every category of registered office change — same city, different city, or across state lines — with the exact MCA filings each one demands.',
     'chips' => [

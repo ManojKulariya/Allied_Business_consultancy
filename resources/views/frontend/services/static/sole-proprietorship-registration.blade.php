@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Sole Proprietorship',
     'category' => ['label' => 'Business Registration', 'slug' => 'business-registration'],
     'eyebrow_icon' => 'bi-person',
-    'seo_title' => 'Sole Proprietorship Registration',
+    'seo_title' => 'Proprietorship Registration',
     'seo_description' => 'Start a Sole Proprietorship in 3–5 working days — GST, MSME/Udyam and Shop & Establishment registrations plus current account support, all at the lowest cost.',
     'intro' => 'The simplest and fastest way to start a business in India. We set up your proprietorship with the right registrations — GST, MSME/Udyam, Shop & Establishment — so you can open a current account and start billing.',
     'chips' => [

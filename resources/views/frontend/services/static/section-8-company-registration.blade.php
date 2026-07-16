@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Section 8 Company',
     'category' => ['label' => 'Business Registration', 'slug' => 'business-registration'],
     'eyebrow_icon' => 'bi-heart',
-    'seo_title' => 'Section 8 Company (NGO) Registration',
+    'seo_title' => 'Section 8 NGO Registration',
     'seo_description' => 'Register a Section 8 non-profit company in 15–20 working days — central licence, MOA/AOA drafting, incorporation and guidance on 12A/80G tax registrations.',
     'intro' => 'The most credible legal structure for a non-profit in India. We obtain your Section 8 licence and incorporate your organisation — built for charity, education, environment, arts, sports and social welfare.',
     'chips' => [

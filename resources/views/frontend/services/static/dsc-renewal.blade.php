@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'DSC Renewal',
     'category' => ['label' => 'Digital Signature Services', 'slug' => 'digital-signature-services'],
     'eyebrow_icon' => 'bi-arrow-repeat',
-    'seo_title' => 'Digital Signature Certificate Renewal',
+    'seo_title' => 'DSC Renewal Online',
     'seo_description' => 'Renew your expiring or expired Digital Signature Certificate quickly — MCA, GST, income tax and DGFT DSC renewal handled in 1–2 working days, no filing disruption.',
     'intro' => 'An expired DSC stops every filing dead in its tracks. We track your certificate\'s expiry and renew it before it lapses — or recover quickly if it already has — so your MCA, GST or DGFT filings never stall.',
     'chips' => [

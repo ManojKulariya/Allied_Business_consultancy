@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Startup India',
     'category' => ['label' => 'Business Registration', 'slug' => 'business-registration'],
     'eyebrow_icon' => 'bi-rocket-takeoff',
-    'seo_title' => 'Startup India Registration (DPIIT)',
+    'seo_title' => 'DPIIT Startup Registration',
     'seo_description' => 'Get DPIIT Startup India recognition in 1–2 weeks — tax exemption eligibility, self-certification, IPR fast-tracking and government tender access. Expert-prepared application.',
     'intro' => 'Unlock government benefits built for startups. We prepare and file your DPIIT recognition application — the gateway to tax exemptions, easier compliance, IPR fast-tracking and startup funding schemes.',
     'chips' => [

@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'IEC Registration',
     'category' => ['label' => 'Licenses & Registrations', 'slug' => 'licenses-registrations'],
     'eyebrow_icon' => 'bi-globe',
-    'seo_title' => 'Import Export Code (IEC) Registration',
+    'seo_title' => 'IEC Registration Online',
     'seo_description' => 'Get your 10-digit Import Export Code from DGFT in 1–3 working days — a one-time registration, valid for life, required for all cross-border trade.',
     'intro' => 'The single code that unlocks global trade for your business. We prepare and file your IEC application on the DGFT portal — a one-time registration that stays valid for the life of your business.',
     'chips' => [

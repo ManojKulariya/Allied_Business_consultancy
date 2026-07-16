@@ -13,7 +13,7 @@ class SeoSettingSeeder extends Seeder
             [
                 'route_name' => 'frontend.home',
                 'page_label' => 'Home',
-                'meta_title' => 'Allied Business Consultancy | CA, GST, Income Tax & Business Registration Experts',
+                'meta_title' => 'GST, Tax & Registration | Allied Business Consultancy',
                 'meta_description' => 'Allied Business Consultancy is a single point of contact for company registration, taxation, GST and compliance — helping entrepreneurs start, manage, protect and grow their businesses with transparent, expert guidance.',
                 'meta_keywords' => 'company registration Jaipur, GST registration, income tax filing, chartered accountant Jaipur, business compliance services, CA firm Rajasthan',
             ],

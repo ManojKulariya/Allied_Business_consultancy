@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Class 3 DSC',
     'category' => ['label' => 'Digital Signature Services', 'slug' => 'digital-signature-services'],
     'eyebrow_icon' => 'bi-vector-pen',
-    'seo_title' => 'Class 3 Digital Signature Certificate (DSC)',
+    'seo_title' => 'Class 3 DSC Certificate',
     'seo_description' => 'Get your Class 3 Digital Signature Certificate for MCA, GST, income tax e-filing and e-tendering — video verification, USB token included, issued in 1–2 days.',
     'intro' => 'The digital equivalent of your signature and seal, legally valid everywhere it counts. We handle your Class 3 DSC application end-to-end — video verification, token dispatch — usually done within a day or two.',
     'chips' => [

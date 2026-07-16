@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Producer Company',
     'category' => ['label' => 'Business Registration', 'slug' => 'business-registration'],
     'eyebrow_icon' => 'bi-flower1',
-    'seo_title' => 'Producer Company (FPC) Registration',
+    'seo_title' => 'FPC Company Registration',
     'seo_description' => 'Register a Farmer Producer Company in 15–20 working days — incorporation for 10+ producers, NABARD/FPO scheme readiness and Section 80PA tax benefits guidance.',
     'intro' => 'Give farmers and producers the power of a company. We incorporate your Producer Company — collective bargaining, better market access and government FPO support, with limited liability for every member.',
     'chips' => [

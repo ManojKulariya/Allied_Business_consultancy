@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'CMA Data Preparation',
     'category' => ['label' => 'Loan & Finance Assistance', 'slug' => 'loan-finance-assistance'],
     'eyebrow_icon' => 'bi-clipboard-data',
-    'seo_title' => 'CMA Data Preparation for Bank Loans',
+    'seo_title' => 'CMA Data for Bank Loans',
     'seo_description' => 'Accurate CMA data preparation for term loans and working capital limits — ratio analysis, fund flow and projections in bank-standard format for faster sanction.',
     'intro' => 'The exact numbers your bank\'s credit team is trained to read. We prepare CMA data — past performance, current estimates and future projections — in the precise bank-standard format, with every ratio correctly computed.',
     'chips' => [

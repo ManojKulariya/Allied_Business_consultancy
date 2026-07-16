@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Private Limited Company',
     'category' => ['label' => 'Business Registration', 'slug' => 'business-registration'],
     'eyebrow_icon' => 'bi-building-add',
-    'seo_title' => 'Private Limited Company Registration',
+    'seo_title' => 'Pvt Ltd Company Registration',
     'seo_description' => 'Register your Private Limited Company online in 7–10 working days. End-to-end MCA filing, name approval, DSC, PAN & TAN — transparent fixed pricing with expert CA support.',
     'intro' => 'Start your company the right way. We handle everything — name approval, digital signatures, MCA filing, PAN & TAN — so you get your Certificate of Incorporation without the paperwork stress.',
     'chips' => [

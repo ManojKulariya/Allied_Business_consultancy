@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'Financial Modelling',
     'category' => ['label' => 'Business Consultancy', 'slug' => 'business-consultancy'],
     'eyebrow_icon' => 'bi-bar-chart-line',
-    'seo_title' => 'Financial Modelling & Projections Services',
+    'seo_title' => 'Financial Modelling Services',
     'seo_description' => 'Investor-grade financial models and projections — 3-statement models, scenario analysis and valuation support for fundraising, bank loans and strategic planning.',
     'intro' => 'Numbers investors and banks actually trust. We build 3-statement financial models with realistic assumptions, scenario analysis and clean formatting — ready for a term sheet, a loan sanction, or your own strategic planning.',
     'chips' => [

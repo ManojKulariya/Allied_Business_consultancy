@@ -6,7 +6,7 @@ $page = [
     'crumb' => 'One Person Company',
     'category' => ['label' => 'Business Registration', 'slug' => 'business-registration'],
     'eyebrow_icon' => 'bi-person-workspace',
-    'seo_title' => 'One Person Company (OPC) Registration',
+    'seo_title' => 'OPC Company Registration',
     'seo_description' => 'Register a One Person Company online in 7–10 working days. Limited liability for solo founders with full control — complete MCA filing, DSC, PAN & TAN at a fixed fee.',
     'intro' => 'Run your business solo — with the protection of a company. An OPC gives a single founder limited liability, corporate credibility and complete control, and we handle the entire MCA process for you.',
     'chips' => [
