@@ -31,7 +31,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <img src="{{ uploaded_asset($blog->banner_image ?: $blog->image) }}" alt="{{ $blog->title }}"
-                         class="w-100 rounded-16 shadow" style="max-height: 480px; object-fit: cover;" loading="lazy">
+                         class="w-100 rounded-16 shadow blog-post-hero-image" loading="lazy">
                 </div>
             </div>
         </div>

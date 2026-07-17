@@ -36,9 +36,9 @@
                     <div class="featured-post-card mb-5" data-aos="fade-up">
                         <div class="row g-0">
                             <div class="col-md-6">
-                                <a href="{{ safe_route('frontend.blogs.show', $featured) }}" class="d-block h-100">
+                                <a href="{{ safe_route('frontend.blogs.show', $featured) }}" class="d-block h-100 featured-post-media">
                                     <img src="{{ uploaded_asset($featured->image) }}" alt="{{ $featured->title }}"
-                                         class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                                         class="w-100 h-100" loading="lazy">
                                 </a>
                             </div>
                             <div class="col-md-6 d-flex align-items-center">

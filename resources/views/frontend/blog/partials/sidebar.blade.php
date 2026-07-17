@@ -47,7 +47,14 @@
                     <li>
                         <a href="{{ safe_route('frontend.blogs.category', $cat) }}"
                            class="{{ isset($activeCategory) && $activeCategory?->id === $cat->id ? 'active' : '' }}">
-                            <span><i class="bi bi-folder2 me-2"></i>{{ $cat->name }}</span>
+                            <span class="cat-label">
+                                @if($cat->image)
+                                    <img src="{{ uploaded_asset($cat->image) }}" alt="{{ $cat->name }}" class="cat-thumb" loading="lazy" width="36" height="36">
+                                @else
+                                    <i class="bi bi-folder2 me-2"></i>
+                                @endif
+                                {{ $cat->name }}
+                            </span>
                             <span class="badge">{{ $cat->blogs_count }}</span>
                         </a>
                     </li>
